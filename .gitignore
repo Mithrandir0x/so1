@@ -16,3 +16,9 @@
 *.exe
 *.out
 *.app
+
+# Sublime Text stuff
+*.sublime-workspace
+
+# Vagrant Stuff
+.vagrant

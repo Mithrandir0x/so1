@@ -1,0 +1,11 @@
+{
+    "folders":
+    [
+        {
+            "name": "Sistemes Operatius I",
+            "path": ".",
+            "file_exclude_patterns": ["*.sublime-*", "*.pdf"],
+            "folder_exclude_patterns": [".vagrant"]
+        }
+    ]
+}
