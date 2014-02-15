@@ -1,6 +1,6 @@
 #
 # minikernel/Makefile
-#	Makefile del sistema 
+#   Makefile del sistema 
 #
 
 INCLUDEDIR=include

@@ -12,7 +12,7 @@
  * Fichero de cabecera que contiene los prototipos de las funciones
  * proporcionadas por el módulo HAL.
  *
- * 	NO SE DEBE MODIFICAR
+ *  NO SE DEBE MODIFICAR
  *
  */
 
@@ -44,12 +44,12 @@
 #include <signal.h>
 
 typedef struct st_contexto {
-	stack_t uc_stack;
-	char * args;
-	sigjmp_buf contexto;
-	void * uc_link;
-	sigset_t uc_sigmask;
-	
+    stack_t uc_stack;
+    char * args;
+    sigjmp_buf contexto;
+    void * uc_link;
+    sigset_t uc_sigmask;
+    
 } ucontext_t;
 
 #endif /* linux2.2 */
@@ -60,8 +60,8 @@ typedef struct st_contexto {
 
 /* Contexto "hardware" de un proceso */
 typedef struct {
-	ucontext_t ctxt;
-	long registros[NREGS];
+    ucontext_t ctxt;
+    long registros[NREGS];
 } contexto_t;
 
 
@@ -86,7 +86,7 @@ int fijar_nivel_int(int nivel); /* fija nivel de interrupción
                                    del procesador devolviendo el previo */
 
 int viene_de_modo_usuario(); /* Devuelve verdadero si el modo previo de
-			    ejecución del procesador era usuario */
+                ejecución del procesador era usuario */
 
 void activar_int_SW(); /* activa la interrupción SW */
 
@@ -114,11 +114,11 @@ void * crear_pila(int tam); /* crea la pila del proceso */
 
 /* crea el contexto inicial del proceso */
 void fijar_contexto_ini(void *mem, void *p_pila, int tam_pila,
-			void * pc_inicial, contexto_t *contexto_ini);
+            void * pc_inicial, contexto_t *contexto_ini);
 
-void liberar_imagen(void *mem);		/* libera el mapa de memoria */
+void liberar_imagen(void *mem);     /* libera el mapa de memoria */
 
-void liberar_pila(void *pila);		/* libera la pila del proceso */
+void liberar_pila(void *pila);      /* libera la pila del proceso */
 
 /*
  *
@@ -132,7 +132,7 @@ int escribir_registro(int nreg, long valor);
 
 char leer_puerto(int dir_puerto); /* lee un carácter del puerto especificado */
 
-void halt();	/* Ejecuta una instrucción HALT para parar UCP */
+void halt();    /* Ejecuta una instrucción HALT para parar UCP */
 
 void panico(char *mens); /* muestra mensaje y termina SO */
 

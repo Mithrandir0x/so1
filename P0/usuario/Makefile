@@ -1,10 +1,6 @@
 #
 # usuario/Makefile
-#	Makefile de programas de usuario
-#
-# NOTA: EN LA VERSIÓN INICIAL SÓLO COMPILARÁN CORRECTAMENTE LOS PROGRAMAS
-# init, excep_arit, excep_mem y simplon, YA QUE LOS DEMÁS USAN LLAMADAS QUE
-# NO TIENE QUE IMPLEMENTAR EL ALUMNO 
+#   Makefile de programas de usuario
 #
 
 

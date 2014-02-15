@@ -35,12 +35,17 @@ int llamsis(int llamada, int nargs, ... /* args */);
 
 
 int crear_proceso(char *prog){
-	return llamsis(CREAR_PROCESO, 1, (long)prog);
+    return llamsis(CREAR_PROCESO, 1, (long)prog);
 }
 int terminar_proceso(){
-	return llamsis(TERMINAR_PROCESO, 0);
+    return llamsis(TERMINAR_PROCESO, 0);
 }
 int escribir(char *texto, unsigned int longi){
-	return llamsis(ESCRIBIR, 2, (long)texto, (long)longi);
+    return llamsis(ESCRIBIR, 2, (long)texto, (long)longi);
+}
+
+int get_current_process_id()
+{
+    return llamsis(GET_PID, 0);
 }
 

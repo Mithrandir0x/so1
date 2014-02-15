@@ -13,23 +13,24 @@
 
 #include "servicios.h"
 
-#define TOT_ITER 200	/* número total de iteraciones */
-#define ITER_EXCEP 22	/* iteración en la que causa excepción */
+#define TOT_ITER 200    /* número total de iteraciones */
+#define ITER_EXCEP 5   /* iteración en la que causa excepción */
 
 int tot=0;
 
 int main(){
-	int i;
-	int tot=0;
+    printf("PID: %d\n", get_current_process_id());
+    int i;
+    int tot=0;
 
-	for (i=0; i<TOT_ITER; i++){
-		printf("excep_arit: i %d \n", i);
+    for (i=0; i<TOT_ITER; i++){
+        printf("excep_arit: i %d \n", i);
 
-		/* Forzando una excepción */
-		if ((i+1)%ITER_EXCEP==0)
-			i/=tot;
-	}
-	/* No debería llegar ya que ha generado una excepción */
-	printf("excep_arit: termina\n");
-	return 0;
+        /* Forzando una excepción */
+        if ((i+1)%ITER_EXCEP==0)
+            i/=tot;
+    }
+    /* No debería llegar ya que ha generado una excepción */
+    printf("excep_arit: termina\n");
+    return 0;
 }

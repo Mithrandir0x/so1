@@ -1,6 +1,6 @@
 #
 # usuario/lib/Makefile
-#	Makefile de la biblioteca
+#   Makefile de la biblioteca
 #
 
 INCLUDEDIR=../include

@@ -18,10 +18,10 @@
 #define _CONST_H
 
 #ifndef NULL
-#define NULL (void *) 0		/* por si acaso no esta ya definida */
+#define NULL (void *) 0     /* por si acaso no esta ya definida */
 #endif
 
-#define MAX_PROC 10		/* dimension de tabla de procesos */
+#define MAX_PROC 10     /* dimension de tabla de procesos */
 
 #define TAM_PILA 32768
 
@@ -29,8 +29,8 @@
 /*
  * Posibles estados del proceso
  */
-#define NO_USADA 0		/* Entrada de tabla de procs. no usada */
-#define TERMINADO 0		/* Proc. TERMINADO == entrada NO_USADA */
+#define NO_USADA 0      /* Entrada de tabla de procs. no usada */
+#define TERMINADO 0     /* Proc. TERMINADO == entrada NO_USADA */
 #define LISTO 1
 #define EJECUCION 2
 #define BLOQUEADO 3
@@ -58,7 +58,7 @@
 #define INT_RELOJ 2     /* interrupcion de reloj */
 #define INT_TERMINAL 3  /* interrupcion de entrada de terminal */
 #define LLAM_SIS 4      /* vector usado para llamadas */
-#define INT_SW 5	/* vector usado para interrupciones software */
+#define INT_SW 5    /* vector usado para interrupciones software */
 
 /* frecuencia de reloj requerida (ticks/segundo) */
 #define TICK 100

@@ -13,14 +13,15 @@
 
 #include "servicios.h"
 
-#define TOT_ITER 200 /* ponga las que considere oportuno */
+#define TOT_ITER 5 /* ponga las que considere oportuno */
 
 int main(){
-	int i;
+    printf("PID: %d\n", get_current_process_id());
+    int i;
 
-	for (i=0; i<TOT_ITER; i++)
-		printf("simplon: i %d\n", i);
+    for (i=0; i<TOT_ITER; i++)
+        printf("simplon: i %d\n", i);
 
-	printf("simplon: termina\n");
-	return 0;
+    printf("simplon: termina\n");
+    return 0;
 }
