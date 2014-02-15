@@ -25,7 +25,8 @@
 
 # Project specifics
 ## minikernel
-kernel*
+kernel
+kernel.o
 ## userspace
 excep_arit*
 excep_mem*
