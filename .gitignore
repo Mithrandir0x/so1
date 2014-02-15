@@ -31,5 +31,5 @@ kernel.o
 excep_arit*
 excep_mem*
 init*
-serv*
+serv.o
 simplon*
