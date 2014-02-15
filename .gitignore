@@ -22,3 +22,13 @@
 
 # Vagrant Stuff
 .vagrant
+
+# Project specifics
+## minikernel
+kernel*
+## userspace
+excep_arit*
+excep_mem*
+init*
+serv*
+simplon*

@@ -1,0 +1,29 @@
+{
+    "folders":
+    [
+        {
+            "name": "MiniKernel",
+            "path": "./minikernel",
+            "file_exclude_patterns": ["*.sublime-*", "*.pdf", "Makefile", "*.a", "*.o"],
+            "folder_exclude_patterns": [".vagrant"]
+        },
+        {
+            "name": "Userspace",
+            "path": "./usuario",
+            "file_exclude_patterns": ["*.sublime-*", "*.pdf", "Makefile", "*.a", "*.o"],
+            "folder_exclude_patterns": [".vagrant"]
+        },
+        {
+            "name": "Make",
+            "path": ".",
+            "file_exclude_patterns": ["*.*"],
+            "file_include_patterns": ["Makefile"],
+            "folder_exclude_patterns": ["lib", "include", "boot"]
+        }
+    ],
+    "settings":
+    {
+        "tab_size": 4,
+        "translate_tabs_to_spaces": true
+    }
+}
