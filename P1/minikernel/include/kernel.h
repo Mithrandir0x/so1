@@ -8,11 +8,7 @@
  */
 
 /*
- *
  * Fichero de cabecera que contiene definiciones usadas por kernel.c
- *
- *      SE DEBE MODIFICAR PARA INCLUIR NUEVA FUNCIONALIDAD
- *
  */
 
 #ifndef _KERNEL_H
@@ -23,28 +19,25 @@
 #include "llamsis.h"
 
 /*
- *
  * Definicion del tipo que corresponde con el BCP.
  * Se va a modificar al incluir la funcionalidad pedida.
- *
  */
 typedef struct BCP_t *BCPptr;
 
 typedef struct BCP_t {
-        int id;                     /* ident. del proceso */
-        int estado;                 /* TERMINADO|LISTO|EJECUCION|BLOQUEADO*/
-        contexto_t contexto_regs;   /* copia de regs. de UCP */
-        void * pila;                /* dir. inicial de la pila */
-    BCPptr siguiente;               /* puntero a otro BCP */
-    void *info_mem;                 /* descriptor del mapa de memoria */
+    int id;                     /* ident. del proceso */
+    int estado;                 /* TERMINADO|LISTO|EJECUCION|BLOQUEADO*/
+    contexto_t contexto_regs;   /* copia de regs. de UCP */
+    void * pila;                /* dir. inicial de la pila */
+    BCPptr siguiente;           /* puntero a otro BCP */
+    void *info_mem;             /* descriptor del mapa de memoria */
+    unsigned int tts;           /* Ticks-To-Sleep (ticks to be sleeping before waking up) */
 } BCP;
 
 /*
- *
  * Definicion del tipo que corresponde con la cabecera de una lista
  * de BCPs. Este tipo se puede usar para diversas listas (procesos listos,
  * procesos bloqueados en semáforo, etc.).
- *
  */
 typedef struct{
     BCP *primero;
@@ -69,11 +62,11 @@ BCP tabla_procs[MAX_PROC];
  */
 lista_BCPs lista_listos = {NULL, NULL};
 
+lista_BCPs l_slept_procs = { NULL, NULL };
+
 /*
- *
  * Definición del tipo que corresponde con una entrada en la tabla de
  * llamadas al sistema.
- *
  */
 typedef struct {
     int (*fservicio)();
@@ -86,6 +79,7 @@ int sis_crear_proceso();
 int sis_terminar_proceso();
 int sis_escribir();
 int sys_get_current_pid();
+int sys_sleep();
 
 /*
  * Variable global que contiene las rutinas que realizan cada llamada
@@ -94,7 +88,8 @@ servicio tabla_servicios[NSERVICIOS] = {
     {sis_crear_proceso},
     {sis_terminar_proceso},
     {sis_escribir},
-    {sys_get_current_pid}
+    {sys_get_current_pid},
+    {sys_sleep}
 };
 
 #endif /* _KERNEL_H */

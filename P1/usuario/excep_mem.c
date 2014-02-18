@@ -18,12 +18,12 @@
 #define ITER_EXCEP 5   /* iteración en la que causa excepción */
 
 int main(){
-    printf("PID: %d\n", get_current_process_id());
+    printf("PID: %d\n", srv_get_current_process_id());
     int i;
     int *p=0;
 
-    if (crear_proceso("simplon")<0)
-        printf("Error creando simplon\n");
+    //if (crear_proceso("simplon")<0)
+    //    printf("Error creando simplon\n");
 
     for (i=0; i<TOT_ITER; i++){
         printf("excep_mem: i %d\n", i);

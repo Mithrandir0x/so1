@@ -39,9 +39,16 @@
  * Niveles de ejecución del procesador. 
  */
 #define NUM_NIVELES 3
+#define NIVEL_0 0 /* User mode */
 #define NIVEL_1 1 /* Int. SW */
 #define NIVEL_2 2 /* Int. Terminal */
 #define NIVEL_3 3 /* Int. Reloj */
+
+/* Much more readable eXecution Levels */
+#define XL_CLK NIVEL_3
+#define XL_TRM NIVEL_2
+#define XL_SW  NIVEL_1
+#define XL_USR NIVEL_0
 
 /*
  *

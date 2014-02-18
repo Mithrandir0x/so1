@@ -44,8 +44,12 @@ int escribir(char *texto, unsigned int longi){
     return llamsis(ESCRIBIR, 2, (long)texto, (long)longi);
 }
 
-int get_current_process_id()
+int srv_get_current_process_id()
 {
-    return llamsis(GET_PID, 0);
+    return llamsis(SYS_ID_GET_PID, 0);
 }
 
+int srv_sleep(unsigned int seconds)
+{
+    return llamsis(SYS_ID_SLEEP, 1, (long) seconds);
+}

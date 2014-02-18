@@ -19,9 +19,14 @@
 int tot=0;
 
 int main(){
-    printf("PID: %d\n", get_current_process_id());
+    printf("PID: %d\n", srv_get_current_process_id());
     int i;
     int tot=0;
+
+    int k;
+    printf("Snooooze...\n");
+    k = srv_sleep(15);
+    printf("Waking up [%d]...\n", k);
 
     for (i=0; i<TOT_ITER; i++){
         printf("excep_arit: i %d \n", i);

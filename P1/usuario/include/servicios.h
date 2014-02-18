@@ -30,7 +30,8 @@ int crear_proceso(char *prog);
 int terminar_proceso();
 int escribir(char *texto, unsigned int longi);
 
-int get_current_process_id();
+int srv_get_current_process_id();
+int srv_sleep(unsigned int seconds);
 
 #endif /* SERVICIOS_H */
 
