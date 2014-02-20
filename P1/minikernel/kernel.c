@@ -264,7 +264,7 @@ static void update_slept_process()
          * For now, they have to wait for the next clock interruption...
          */
         bcp->tts--;
-        printk("[KRN][%2d] BCP[%2d]->tts = [%d]\n", p_proc_actual->id, bcp->id, bcp->tts);
+        /* printk("[KRN][%2d] BCP[%2d]->tts = [%d]\n", p_proc_actual->id, bcp->id, bcp->tts); */
         if ( !bcp->tts )
             unblock_process(bcp);
     }
@@ -473,8 +473,8 @@ int sys_get_current_pid()
 int sys_sleep()
 {
     /* Update process ticks to sleep  */
-    /* p_proc_actual->tts = (unsigned int) leer_registro(1) * TICK; */
-    p_proc_actual->tts = (unsigned int) leer_registro(1);
+    p_proc_actual->tts = (unsigned int) leer_registro(1) * TICK;
+    /* p_proc_actual->tts = (unsigned int) leer_registro(1); */
     printk("[KRN][%2d] PUTTING TO SLEEP CURRENT PROCESS FOR [%d] TICKS\n", p_proc_actual->id, p_proc_actual->tts);
 
     /* Block the current process */

@@ -126,7 +126,12 @@ void liberar_pila(void *pila);      /* libera la pila del proceso */
  *
  */
 
-long leer_registro(int nreg); 
+/*
+ * When treating a system call, some parameters may be passed by from userspace
+ * to the kernel. This function is in charge of reading those parameters. The first
+ * parameter is always the index of the system service to be called.
+ */
+long leer_registro(int nreg);
 
 int escribir_registro(int nreg, long valor); 
 
