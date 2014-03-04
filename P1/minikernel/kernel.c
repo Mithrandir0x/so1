@@ -20,7 +20,6 @@
  */
 static void block_process();
 static void unblock_process(BCP* bcp);
-static void swap_process(BCP *p_proc_anterior);
 
 int sys_get_current_pid();
 int sys_sleep();
@@ -103,6 +102,29 @@ static void eliminar_elem(lista_BCPs *lista, BCP * proc){
     }
 }
 
+static void print_bcp_list(lista_BCPs *list)
+{
+    BCP *p = list->primero;
+
+    if ( p_proc_actual )
+        printk("[KRN][%2d][%16.16s] {\n", p_proc_actual->id, "print_bcp_list");
+    else
+        printk("[KRN][-1][%16.16s] {\n", "print_bcp_list");
+    
+    for ( ; p ; p = p->siguiente )
+    {
+        if ( p_proc_actual )
+            printk("[KRN][%2d][%16.16s]   [%2d]\n", p_proc_actual->id, "print_bcp_list", p->id);
+        else
+            printk("[KRN][-1][%16.16s]   [%2d]\n", "print_bcp_list", p->id);
+    }
+
+    if ( p_proc_actual )
+        printk("[KRN][%2d][%16.16s] }\n", p_proc_actual->id, "print_bcp_list");
+    else
+        printk("[KRN][-1][%16.16s] }\n", "print_bcp_list");
+}
+
 /*
  *
  * Funciones relacionadas con la planificacion
@@ -115,7 +137,10 @@ static void eliminar_elem(lista_BCPs *lista, BCP * proc){
 static void espera_int(){
     int nivel;
 
-    /* printk("[KRN][-1] NO HAY LISTOS. ESPERA INT\n"); */
+    // if ( p_proc_actual )
+    //     printk("[KRN][%2d] WAITING FOR INTERRUPTION\n", p_proc_actual->id);
+    // else
+    //     printk("[KRN][-1] WAITING FOR INTERRUPTION\n");
 
     /* Baja al mínimo el nivel de interrupción mientras espera */
     nivel=fijar_nivel_int(NIVEL_1);
@@ -127,13 +152,21 @@ static void espera_int(){
  * Función de planificacion que implementa un algoritmo FIFO.
  */
 static BCP * planificador(){
+    if ( lista_listos.primero==NULL )
+    {
+        if ( p_proc_actual )
+            printk("[KRN][%2d][%16.16s] WAITING FOR A PROCESS TO AWAKE\n", p_proc_actual->id, "planificador");
+        else
+            printk("[KRN][-1][%16.16s] WAITING FOR A PROCESS TO AWAKE\n", "planificador");
+    }
+    
     while (lista_listos.primero==NULL)
         espera_int();       /* No hay nada que hacer */
 
     if ( p_proc_actual )
-        printk("[KRN][%2d] SCHEDULLING NEXT PROCESS\n", p_proc_actual->id);
+        printk("[KRN][%2d][%16.16s] SCHEDULLING NEXT PROCESS\n", p_proc_actual->id, "planificador");
     else
-        printk("[KRN][-1] SCHEDULLING NEXT PROCESS\n");
+        printk("[KRN][-1][%16.16s] SCHEDULLING NEXT PROCESS\n", "planificador");
     
     return lista_listos.primero;
 }
@@ -146,22 +179,34 @@ static BCP * planificador(){
  */
 static void liberar_proceso(){
     BCP * p_proc_anterior;
+    BCP * p_proc_siguiente;
 
-    printk("[KRN][%2d] FREEING PROCESS\n", p_proc_actual->id);
+    printk("[KRN][%2d][%16.16s] FREEING PROCESS\n", p_proc_actual->id, "liberar_proceso");
 
-    liberar_imagen(p_proc_actual->info_mem); /* liberar mapa */
     /*
     If "liberar_imagen" is called without any image on memory, the Kernel
     will be halted and execution will stop.
     */
+    liberar_imagen(p_proc_actual->info_mem); /* liberar mapa */
 
     p_proc_actual->estado=TERMINADO;
     eliminar_primero(&lista_listos); /* proc. fuera de listos */
 
+    printk("[KRN][%2d][%16.16s] READY BCP LIST: \n", p_proc_actual->id, "liberar_proceso");
+    print_bcp_list(&lista_listos);
+
     /* Realizar cambio de contexto */
     p_proc_anterior=p_proc_actual;
+    p_proc_siguiente = planificador();
 
-    swap_process(p_proc_anterior);
+    printk("[KRN][%2d][%16.16s] CHANGING CONTEXT: [%d] => [%d]\n", p_proc_actual->id, "liberar_proceso", p_proc_anterior->id, p_proc_siguiente->id);
+
+    p_proc_actual = p_proc_siguiente;
+
+    liberar_pila(p_proc_anterior->pila);
+    
+    /* "cambio_contexto" is in charge of rising the interruption level to XL_CLK. */
+    cambio_contexto(NULL, &(p_proc_actual->contexto_regs));
         
         return; /* no debería llegar aqui */
 }
@@ -171,7 +216,7 @@ static void block_process()
     BCP* p_proc_anterior;
     BCP* p_proc_siguiente;
 
-    printk("[KRN][%2d] BLOCKING PROCESS: [%d]\n", p_proc_actual->id, p_proc_actual->id);
+    printk("[KRN][%2d][%16.16s] BLOCKING PROCESS: [%d]\n", p_proc_actual->id, "block_process", p_proc_actual->id);
 
     fijar_nivel_int(XL_SW); /* NIVEL_1 */
 
@@ -183,9 +228,15 @@ static void block_process()
     /* Insert the process to sleep in the list */
     insertar_ultimo(&l_slept_procs, p_proc_anterior);
 
+    printk("[KRN][%2d][%16.16s] SLEPT BCP LIST: \n", p_proc_actual->id, "block_process");
+    print_bcp_list(&l_slept_procs);
+
+    printk("[KRN][%2d][%16.16s] READY BCP LIST: \n", p_proc_actual->id, "block_process");
+    print_bcp_list(&lista_listos);
+
     p_proc_siguiente = planificador();
 
-    printk("[KRN][%2d] CHANGING CONTEXT: [%d] => [%d]\n", p_proc_actual->id, p_proc_anterior->id, p_proc_siguiente->id);
+    printk("[KRN][%2d][%16.16s] CHANGING CONTEXT: [%d] => [%d]\n", p_proc_actual->id, "block_process", p_proc_anterior->id, p_proc_siguiente->id);
 
     p_proc_actual = p_proc_siguiente;
 
@@ -203,50 +254,50 @@ static void block_process()
 
 static void unblock_process(BCP* bcp)
 {
+    BCP* p_proc_siguiente;
     BCP* p_proc_anterior;
 
-    printk("[KRN][%2d] AWAKENING PROCESS: [%d]\n", p_proc_actual->id, bcp->id);
+    printk("[KRN][%2d][%16.16s] AWAKENING PROCESS: [%d]\n", p_proc_actual->id, "unblock_process", bcp->id);
 
     fijar_nivel_int(XL_SW); /* NIVEL_1 */
 
     /* Remove the awaken bcp from the slept process list */
-    printk("[KRN][%2d] REMOVING PROCESS FROM THE SLEPT LIST\n", p_proc_actual->id);    
+    printk("[KRN][%2d][%16.16s] REMOVING PROCESS FROM THE SLEPT LIST\n", p_proc_actual->id, "unblock_process");    
     eliminar_elem(&l_slept_procs, bcp);
     
     /* Add the awaken bcp to the first one on the ready to be processed list */
-    printk("[KRN][%2d] ADDING THE AWAKEN PROCESS TO THE READY LIST\n", p_proc_actual->id);    
+    printk("[KRN][%2d][%16.16s] ADDING THE AWAKEN PROCESS TO THE READY LIST\n", p_proc_actual->id, "unblock_process");    
     p_proc_anterior = lista_listos.primero;
     lista_listos.primero = bcp;
     bcp->siguiente = p_proc_anterior;
     bcp->estado = LISTO;
 
-    swap_process(p_proc_anterior);
+    printk("[KRN][%2d][%16.16s] SLEPT BCP LIST: \n", p_proc_actual->id, "unblock_process");
+    print_bcp_list(&l_slept_procs);
 
+    printk("[KRN][%2d][%16.16s] READY BCP LIST: \n", p_proc_actual->id, "unblock_process");
+    print_bcp_list(&lista_listos);
+
+    if ( p_proc_anterior == NULL )
+    {
+        // If the BCP is null, it means that it is the only process
+        // to be executed, thus the necessity to return the context
+        // to the blocking process, and make no context swap
         return;
-}
-
-/*
- * Given an old process control block, swap the context
- * to a new one, and free the heap of the old one.
- */
-static void swap_process(BCP *p_proc_anterior)
-{
-    BCP* p_proc_siguiente;
-    
-    p_proc_siguiente = planificador();
-
-    if ( p_proc_anterior != NULL )
-        printk("[KRN][%2d] CHANGING CONTEXT: [%d] => [%d]\n", p_proc_actual->id, p_proc_anterior->id, p_proc_siguiente->id);
+    }
     else
-        printk("[KRN][%2d] CHANGING CONTEXT: [-1] => [%d]\n", p_proc_actual->id, p_proc_siguiente->id);
+    {
+        p_proc_siguiente = planificador();
 
-    p_proc_actual = p_proc_siguiente;
+        printk("[KRN][%2d][%16.16s] CHANGING CONTEXT: [%d] => [%d]\n", p_proc_actual->id, "unblock_process", p_proc_anterior->id, p_proc_siguiente->id);
 
-    if ( p_proc_anterior != NULL )
+        p_proc_actual = p_proc_siguiente;
+
         liberar_pila(p_proc_anterior->pila);
-    
-    /* "cambio_contexto" is in charge of rising the interruption level to XL_CLK. */
-    cambio_contexto(NULL, &(p_proc_actual->contexto_regs));
+        
+        /* "cambio_contexto" is in charge of rising the interruption level to XL_CLK. */
+        cambio_contexto(NULL, &(p_proc_actual->contexto_regs));
+    }
 }
 
 static void update_slept_process()
@@ -287,9 +338,9 @@ static void update_slept_process()
 static void exc_arit(){
 
     if (!viene_de_modo_usuario())
-        panico("[KRN][-1] >> KERNEL_EXCEPTION [Invalid arithmetic operation] <<");
+        panico("[KRN][-1][        exc_arit] >> KERNEL_EXCEPTION [Invalid arithmetic operation] <<");
 
-    printk("[KRN][%2d] >> EXCEPTION [Invalid arithmetic operation] <<\n", p_proc_actual->id);
+    printk("[KRN][%2d][%16.16s] >> EXCEPTION [Invalid arithmetic operation] <<\n", p_proc_actual->id, "exc_arit");
     liberar_proceso();
 
         return; /* no debería llegar aqui */
@@ -303,10 +354,10 @@ static void exc_mem(){
     if (!viene_de_modo_usuario())
     {
         if ( p_proc_actual )
-            panico("[KRN][-1] >> KERNEL_EXCEPTION [Invalid memory access] <<");
+            panico("[KRN][-1][         exc_mem] >> KERNEL_EXCEPTION [Invalid memory access] <<");
     }
 
-    printk("[KRN][%2d] >> EXCEPTION [Invalid memory access] <<\n", p_proc_actual->id);
+    printk("[KRN][%2d][%16.16s] >> EXCEPTION [Invalid memory access] <<\n", p_proc_actual->id, "exc_mem");
     liberar_proceso();
 
         return; /* no debería llegar aqui */
@@ -317,7 +368,7 @@ static void exc_mem(){
  */
 static void int_terminal(){
 
-    printk("[KRN][%2d] TRATANDO INT. DE TERMINAL %c\n", p_proc_actual->id, leer_puerto(DIR_TERMINAL));
+    printk("[KRN][%2d][%16.16s] TRATANDO INT. DE TERMINAL %c\n", p_proc_actual->id, "int_terminal", leer_puerto(DIR_TERMINAL));
 
         return;
 }
@@ -395,14 +446,14 @@ static int crear_tarea(char *prog){
         error= 0;
         
         if ( p_proc_actual )
-            printk("[KRN][%2d] LOADED IMAGE [%s]\n", p_proc_actual->id, prog);
+            printk("[KRN][%2d][%16.16s] LOADED IMAGE [%s] WITH PID [%2d]\n", p_proc_actual->id, "crear_tarea", prog, proc);
         else
-            printk("[KRN][-1] LOADED IMAGE [%s]\n", prog);
+            printk("[KRN][-1][%16.16s] LOADED IMAGE [%s] WITH PID [%2d]\n", "crear_tarea", prog, proc);
     }
     else
     {
         error= -1; /* fallo al crear imagen */
-        printk("[KRN][-1] >> ERROR [Could not load image [%s]] <<\n", prog);
+        printk("[KRN][-1][%16.16s] >> ERROR [Could not load image [%s]] <<\n", "crear_tarea", prog);
     }
 
     return error;
@@ -424,7 +475,7 @@ int sis_crear_proceso(){
     int res;
 
     prog = (char *)leer_registro(1);
-    printk("[KRN][%2d] CREATING PROCESS [%s]\n", p_proc_actual->id, prog);
+    printk("[KRN][%2d][%16.16s] CREATING PROCESS [%s]\n", p_proc_actual->id, "sis_crear_proceso", prog);
     res=crear_tarea(prog);
     return res;
 }
@@ -451,7 +502,7 @@ int sis_escribir()
  */
 int sis_terminar_proceso(){
 
-    printk("[KRN][%2d] ENDING PROCESS\n", p_proc_actual->id);
+    printk("[KRN][%2d][%16.16s] ENDING PROCESS\n", p_proc_actual->id, "sis_terminar_proceso");
 
     liberar_proceso();
 
@@ -475,7 +526,7 @@ int sys_sleep()
     /* Update process ticks to sleep  */
     p_proc_actual->tts = (unsigned int) leer_registro(1) * TICK;
     /* p_proc_actual->tts = (unsigned int) leer_registro(1); */
-    printk("[KRN][%2d] PUTTING TO SLEEP CURRENT PROCESS FOR [%d] TICKS\n", p_proc_actual->id, p_proc_actual->tts);
+    printk("[KRN][%2d][%16.16s] PUTTING TO SLEEP CURRENT PROCESS FOR [%d] TICKS\n", p_proc_actual->id, "sys_sleep", p_proc_actual->tts);
 
     /* Block the current process */
     block_process();
@@ -504,13 +555,13 @@ int main(){
     iniciar_cont_teclado();     /* inici cont. teclado */
 
     /* crea proceso inicial */
-    printk("[KRN][-1] INITIALIZING KERNEL\n");
+    printk("[KRN][-1][            main] INITIALIZING KERNEL\n");
     if (crear_tarea((void *) "init") < 0)
-        panico("[KRN][-1] >> KERNEL_EXCEPTION [[init] image not found] <<");
+        panico("[KRN][-1][            main] >> KERNEL_EXCEPTION [[init] image not found] <<");
     
     /* activa proceso inicial */
     p_proc_actual=planificador();
     cambio_contexto(NULL, &(p_proc_actual->contexto_regs));
-    panico("[KRN][-1] >> KERNEL_EXCEPTION [S.O. reactivado inesperadamente] <<");
+    panico("[KRN][-1][            main] >> KERNEL_EXCEPTION [S.O. reactivado inesperadamente] <<");
     return 0;
 }

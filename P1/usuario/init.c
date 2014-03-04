@@ -30,6 +30,9 @@ int main()
     /* No existe: debe fallar */
     crear_proceso("noexiste");
 
+    /* Snorlax goes to sleep... */
+    crear_proceso("dormilon");
+
     printf("init: termina\n");
     
     return 0; 

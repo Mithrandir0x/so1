@@ -21,7 +21,7 @@ int main(){
 
     int k;
     printf("Snooooze...\n");
-    k = srv_sleep(5);
+    k = srv_sleep(2);
     printf("Waking up [%d]...\n", k);
 
     for (i=0; i<TOT_ITER; i++)

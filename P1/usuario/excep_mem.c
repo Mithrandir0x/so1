@@ -24,6 +24,10 @@ int main(){
 
     //if (crear_proceso("simplon")<0)
     //    printf("Error creando simplon\n");
+    // int k;
+    // printf("Snooooze...\n");
+    // k = srv_sleep(5);
+    // printf("Waking up [%d]...\n", k);
 
     for (i=0; i<TOT_ITER; i++){
         printf("excep_mem: i %d\n", i);
