@@ -266,43 +266,20 @@ static void unblock_process(BCP* bcp)
     eliminar_elem(&l_slept_procs, bcp);
     
     /* Add the awaken bcp to the first one on the ready to be processed list */
-    printk("[KRN][%2d][%16.16s] ADDING THE AWAKEN PROCESS TO THE READY LIST\n", p_proc_actual->id, "unblock_process");    
-    p_proc_anterior = lista_listos.primero;
-    lista_listos.primero = bcp;
-    bcp->siguiente = p_proc_anterior;
+    printk("[KRN][%2d][%16.16s] ADDING THE AWAKEN PROCESS TO THE READY LIST\n", p_proc_actual->id, "unblock_process");
     bcp->estado = LISTO;
+    insertar_ultimo(&lista_listos, bcp);
 
     printk("[KRN][%2d][%16.16s] SLEPT BCP LIST: \n", p_proc_actual->id, "unblock_process");
     print_bcp_list(&l_slept_procs);
 
     printk("[KRN][%2d][%16.16s] READY BCP LIST: \n", p_proc_actual->id, "unblock_process");
     print_bcp_list(&lista_listos);
-
-    if ( p_proc_anterior == NULL )
-    {
-        // If the BCP is null, it means that it is the only process
-        // to be executed, thus the necessity to return the context
-        // to the blocking process, and make no context swap
-        return;
-    }
-    else
-    {
-        p_proc_siguiente = planificador();
-
-        printk("[KRN][%2d][%16.16s] CHANGING CONTEXT: [%d] => [%d]\n", p_proc_actual->id, "unblock_process", p_proc_anterior->id, p_proc_siguiente->id);
-
-        p_proc_actual = p_proc_siguiente;
-
-        liberar_pila(p_proc_anterior->pila);
-        
-        /* "cambio_contexto" is in charge of rising the interruption level to XL_CLK. */
-        cambio_contexto(NULL, &(p_proc_actual->contexto_regs));
-    }
 }
 
 static void update_slept_process()
 {
-    /* printk("[KRN][%2d] Updating slept process\n", p_proc_actual->id); */
+    //printk("[KRN][%2d][%16.16s] Updating slept process\n", p_proc_actual->id, "update_slept_process");
 
     BCP* bcp = l_slept_procs.primero;
     for ( ; bcp ; bcp = bcp->siguiente )
@@ -315,7 +292,7 @@ static void update_slept_process()
          * For now, they have to wait for the next clock interruption...
          */
         bcp->tts--;
-        /* printk("[KRN][%2d] BCP[%2d]->tts = [%d]\n", p_proc_actual->id, bcp->id, bcp->tts); */
+        //printk("[KRN][%2d][%16.16s] BCP[%2d]->tts = [%d]\n", p_proc_actual->id, "update_slept_process", bcp->id, bcp->tts);
         if ( !bcp->tts )
             unblock_process(bcp);
     }
@@ -452,8 +429,12 @@ static int crear_tarea(char *prog){
     }
     else
     {
-        error= -1; /* fallo al crear imagen */
-        printk("[KRN][-1][%16.16s] >> ERROR [Could not load image [%s]] <<\n", "crear_tarea", prog);
+        error = -1; /* fallo al crear imagen */
+        
+        if ( p_proc_actual )
+            printk("[KRN][%2d][%16.16s] >> ERROR [Could not load image [%s]] <<\n", p_proc_actual->id, "crear_tarea", prog, proc);
+        else
+            printk("[KRN][-1][%16.16s] >> ERROR [Could not load image [%s]] <<\n", "crear_tarea", prog, proc);
     }
 
     return error;
