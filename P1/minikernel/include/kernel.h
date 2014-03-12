@@ -92,5 +92,9 @@ servicio tabla_servicios[NSERVICIOS] = {
     {sys_sleep}
 };
 
-#endif /* _KERNEL_H */
+/**
+ * Coment out this line to enable debug output when updating BCP's TTS's.
+ */
+//#define __KRN_DBG_UPDATE_SLEPT_PROCESS__
 
+#endif /* _KERNEL_H */

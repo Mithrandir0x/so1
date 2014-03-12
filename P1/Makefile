@@ -28,7 +28,7 @@ exe:
 	./boot/boot ./minikernel/kernel
 
 # Target to pack for delivery
-dist: clean
+dist:
 	mkdir -p $(DIST_PKG)
 	cp -r ./minikernel $(DIST_PKG)/
 	cp -r ./usuario $(DIST_PKG)/
@@ -39,9 +39,9 @@ dist: clean
 tar:
 	cd $(DIST); tar $(TAR_OPTS) ./$(PKG).tar.gz ./$(PKG)
 
-build: dist tar
+build: clean dist tar
 
-dist_exam: clean
+dist_exam:
 	mkdir -p $(DIST_PKG_EXAM)
 	cp -r ./minikernel $(DIST_PKG_EXAM)/
 	cp -r ./usuario $(DIST_PKG_EXAM)/
@@ -52,4 +52,4 @@ dist_exam: clean
 tar_exam:
 	cd $(DIST); tar $(TAR_OPTS) ./$(PKG_EXAM).tar.gz ./$(PKG_EXAM)
 
-build_exam: dist_exam tar_exam
+build_exam: clean dist_exam tar_exam

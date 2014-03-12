@@ -138,9 +138,9 @@ static void espera_int(){
     int nivel;
 
     // if ( p_proc_actual )
-    //     printk("[KRN][%2d] WAITING FOR INTERRUPTION\n", p_proc_actual->id);
+    //     printk("[KRN][%2d][%16.16s] WAITING FOR INTERRUPTION\n", p_proc_actual->id, "espera_int");
     // else
-    //     printk("[KRN][-1] WAITING FOR INTERRUPTION\n");
+    //     printk("[KRN][-1][%16.16s] WAITING FOR INTERRUPTION\n", "espera_int");
 
     /* Baja al mínimo el nivel de interrupción mientras espera */
     nivel=fijar_nivel_int(NIVEL_1);
@@ -213,12 +213,13 @@ static void liberar_proceso(){
 
 static void block_process()
 {
+    int old_int_level;
     BCP* p_proc_anterior;
     BCP* p_proc_siguiente;
 
-    printk("[KRN][%2d][%16.16s] BLOCKING PROCESS: [%d]\n", p_proc_actual->id, "block_process", p_proc_actual->id);
+    old_int_level = fijar_nivel_int(XL_CLK); /* NIVEL_3 */
 
-    fijar_nivel_int(XL_SW); /* NIVEL_1 */
+    printk("[KRN][%2d][%16.16s] BLOCKING PROCESS: [%d]\n", p_proc_actual->id, "block_process", p_proc_actual->id);
 
     /* Remove the top process from the ready list, and mark it as BLOCKED. */
     p_proc_actual->estado = BLOQUEADO;
@@ -234,6 +235,8 @@ static void block_process()
     printk("[KRN][%2d][%16.16s] READY BCP LIST: \n", p_proc_actual->id, "block_process");
     print_bcp_list(&lista_listos);
 
+    fijar_nivel_int(old_int_level);
+
     p_proc_siguiente = planificador();
 
     printk("[KRN][%2d][%16.16s] CHANGING CONTEXT: [%d] => [%d]\n", p_proc_actual->id, "block_process", p_proc_anterior->id, p_proc_siguiente->id);
@@ -248,18 +251,15 @@ static void block_process()
      * possible to restore it after being awaken.
      */
     cambio_contexto(&(p_proc_anterior->contexto_regs), &(p_proc_actual->contexto_regs));
-
-        return;
 }
 
 static void unblock_process(BCP* bcp)
 {
-    BCP* p_proc_siguiente;
-    BCP* p_proc_anterior;
+    int old_int_level;
+
+    old_int_level = fijar_nivel_int(XL_CLK); /* NIVEL_3 */
 
     printk("[KRN][%2d][%16.16s] AWAKENING PROCESS: [%d]\n", p_proc_actual->id, "unblock_process", bcp->id);
-
-    fijar_nivel_int(XL_SW); /* NIVEL_1 */
 
     /* Remove the awaken bcp from the slept process list */
     printk("[KRN][%2d][%16.16s] REMOVING PROCESS FROM THE SLEPT LIST\n", p_proc_actual->id, "unblock_process");    
@@ -275,6 +275,8 @@ static void unblock_process(BCP* bcp)
 
     printk("[KRN][%2d][%16.16s] READY BCP LIST: \n", p_proc_actual->id, "unblock_process");
     print_bcp_list(&lista_listos);
+
+    fijar_nivel_int(old_int_level);
 }
 
 static void update_slept_process()
@@ -282,19 +284,25 @@ static void update_slept_process()
     //printk("[KRN][%2d][%16.16s] Updating slept process\n", p_proc_actual->id, "update_slept_process");
 
     BCP* bcp = l_slept_procs.primero;
-    for ( ; bcp ; bcp = bcp->siguiente )
+    BCP* next_bcp = NULL;
+    //for ( ; bcp ; bcp = bcp->siguiente )
+    while ( bcp )
     {
-        /*
-         * Little issue: Unblocking a process leads to a change of context.
-         * What happens to other sleeping process that during the moment
-         * of unblocking a process, can also be unblocked?
-         * 
-         * For now, they have to wait for the next clock interruption...
-         */
         bcp->tts--;
-        //printk("[KRN][%2d][%16.16s] BCP[%2d]->tts = [%d]\n", p_proc_actual->id, "update_slept_process", bcp->id, bcp->tts);
+        next_bcp = bcp->siguiente;
+
+#ifdef __KRN_DBG_UPDATE_SLEPT_PROCESS__
+        printk("[KRN][%2d][%16.16s] BCP[%2d]->tts = [%d]\n", p_proc_actual->id, "update_slept_process", bcp->id, bcp->tts);
+#endif
         if ( !bcp->tts )
+        {
             unblock_process(bcp);
+            bcp = next_bcp;
+        }
+        else
+        {
+            bcp = bcp->siguiente;
+        }
     }
 }
 
@@ -355,7 +363,7 @@ static void int_terminal(){
  */
 static void int_reloj(){
 
-    /* printk("[KRN][%2d] >> INTERRUPTION [Clock] <<\n", p_proc_actual->id); */
+    //printk("[KRN][%2d] >> INTERRUPTION [Clock] <<\n", p_proc_actual->id);
 
     update_slept_process();
 
