@@ -2,7 +2,7 @@
 # Makefile
 # 	Makefile global del sistema
 #
-DELIVERABLE_N = 1
+DELIVERABLE_N = 2
 PKG           = minikernel_LopezSanchezOriol-pract-$(DELIVERABLE_N)
 PKG_EXAM      = $(PKG)-Modif
 DIST          = ./dist

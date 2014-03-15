@@ -1,0 +1,10 @@
+LOPEZ SANCHEZ ORIOL
+
+It is possible to execute the code by calling in shell:
+
+$ make clean
+$ make
+$ make exe
+
+It is possible to enable debug logs when updating slept processes to be awaken
+by commenting out the macro __KRN_DBG_UPDATE_SLEPT_PROCESS__ defined at "kernel.h".
