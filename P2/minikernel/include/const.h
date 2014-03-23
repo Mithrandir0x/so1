@@ -50,6 +50,10 @@
 #define XL_SW  NIVEL_1
 #define XL_USR NIVEL_0
 
+/* Process priority minimum and maximum levels */
+#define MIN_PRIO 10
+#define MAX_PRIO 50
+
 /*
  *
  *  Definicion de constantes relacionadas con vectores de interrupcion

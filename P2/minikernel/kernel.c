@@ -16,13 +16,40 @@
 #include "kernel.h" /* Contiene defs. usadas por este modulo */
 
 /**
- * User defined system and internal functions declarations
+ * BCP list manipulation function declarations
  */
+static void iniciar_tabla_proc();
+static int buscar_BCP_libre();
+static void insertar_ultimo(lista_BCPs *lista, BCP * proc);
+static void eliminar_primero(lista_BCPs *lista);
+static void eliminar_elem(lista_BCPs *lista, BCP * proc);
+static void print_bcp_list(lista_BCPs *list);
+static BCP* get_max_priority_bcp(lista_BCPs *list);
+
+/**
+ * Scheduler related function declarations
+ */
+static void espera_int();
+static BCP * planificador();
+
+/**
+ * User defined system and internal function declarations
+ */
+static int crear_tarea(char *prog);
+static void liberar_proceso();
 static void block_process();
 static void unblock_process(BCP* bcp);
 
-int sys_get_current_pid();
-int sys_sleep();
+/**
+ * Interruption treatment and auxiliary function declarations
+ */
+static void update_slept_process();
+static void exc_arit();
+static void exc_mem();
+static void int_terminal();
+static void int_reloj();
+static void int_sw();
+static void tratar_llamsis();
 
 /*
  *
@@ -102,6 +129,9 @@ static void eliminar_elem(lista_BCPs *lista, BCP * proc){
     }
 }
 
+/**
+ * Print a BCP list.
+ */
 static void print_bcp_list(lista_BCPs *list)
 {
     BCP *p = list->primero;
@@ -114,15 +144,42 @@ static void print_bcp_list(lista_BCPs *list)
     for ( ; p ; p = p->siguiente )
     {
         if ( p_proc_actual )
-            printk("[KRN][%2d][%16.16s]   [%2d]\n", p_proc_actual->id, "print_bcp_list", p->id);
+            printk("[KRN][%2d]", p_proc_actual->id);
         else
-            printk("[KRN][-1][%16.16s]   [%2d]\n", "print_bcp_list", p->id);
+            printk("[KRN][-1]");
+
+        printk("[%16.16s]   [%2d] {pr: [%2d]}\n",
+            "print_bcp_list",
+            p->id,
+            p->priority
+        );
     }
 
     if ( p_proc_actual )
         printk("[KRN][%2d][%16.16s] }\n", p_proc_actual->id, "print_bcp_list");
     else
         printk("[KRN][-1][%16.16s] }\n", "print_bcp_list");
+}
+
+static BCP* get_max_priority_bcp(lista_BCPs *list)
+{
+    unsigned int max = MIN_PRIO;
+    BCP *p = list->primero;
+    BCP *p_max = NULL;
+    
+    for ( ; p ; p->siguiente )
+    {
+        if ( p->priority == MAX_PRIO ) 
+            return p;
+        
+        if ( p->priority > max )
+        {
+            p_max = p;
+            max = p->priority;
+        }
+    }
+
+    return p_max;
 }
 
 /*
@@ -148,6 +205,8 @@ static void espera_int(){
     fijar_nivel_int(nivel);
 }
 
+#ifdef __KRN_SCHEDULER_DEFAULT__
+
 /*
  * Función de planificacion que implementa un algoritmo FIFO.
  */
@@ -170,6 +229,32 @@ static BCP * planificador(){
     
     return lista_listos.primero;
 }
+
+#endif
+
+#ifdef __KRN_SCHEDULER_PRIORITIES__
+
+static BCP * planificador(){
+    if ( lista_listos.primero==NULL )
+    {
+        if ( p_proc_actual )
+            printk("[KRN][%2d][%16.16s] WAITING FOR A PROCESS TO AWAKE\n", p_proc_actual->id, "planificador");
+        else
+            printk("[KRN][-1][%16.16s] WAITING FOR A PROCESS TO AWAKE\n", "planificador");
+    }
+    
+    while (lista_listos.primero==NULL)
+        espera_int();       /* No hay nada que hacer */
+
+    if ( p_proc_actual )
+        printk("[KRN][%2d][%16.16s] SCHEDULLING NEXT PROCESS\n", p_proc_actual->id, "planificador");
+    else
+        printk("[KRN][-1][%16.16s] SCHEDULLING NEXT PROCESS\n", "planificador");
+    
+    return lista_listos.primero;
+}
+
+#endif
 
 /*
  *
@@ -276,6 +361,8 @@ static void unblock_process(BCP* bcp)
     printk("[KRN][%2d][%16.16s] READY BCP LIST: \n", p_proc_actual->id, "unblock_process");
     print_bcp_list(&lista_listos);
 
+    activar_int_SW();
+
     fijar_nivel_int(old_int_level);
 }
 
@@ -353,7 +440,7 @@ static void exc_mem(){
  */
 static void int_terminal(){
 
-    printk("[KRN][%2d][%16.16s] TRATANDO INT. DE TERMINAL %c\n", p_proc_actual->id, "int_terminal", leer_puerto(DIR_TERMINAL));
+    printk("[KRN][%2d][%16.16s] TRATANDO INT. DE TERMINAL [%c]\n", p_proc_actual->id, "int_terminal", leer_puerto(DIR_TERMINAL));
 
         return;
 }
@@ -388,9 +475,14 @@ static void tratar_llamsis(){
 /*
  * Tratamiento de interrupciuones software
  */
-static void int_sw(){
+static void int_sw()
+{
+    if ( p_proc_actual )
+        printk("[KRN][%2d]", p_proc_actual->id);
+    else
+        printk("[KRN][-1]");
 
-    printk("[KRN] TRATANDO INT. SW\n");
+    printk("[%16.16s] TREATING SOFTWARE INTERRUPTION\n", "int_sw");
 
     return;
 }
@@ -425,6 +517,11 @@ static int crear_tarea(char *prog){
             &(p_proc->contexto_regs));
         p_proc->id=proc;
         p_proc->estado=LISTO;
+
+        if ( p_proc_actual )
+            p_proc->priority = p_proc_actual->priority;
+        else
+            p_proc->priority = MIN_PRIO;
 
         /* lo inserta al final de cola de listos */
         insertar_ultimo(&lista_listos, p_proc);
@@ -521,6 +618,23 @@ int sys_sleep()
     block_process();
     
         return 0; /* WOOOPS */
+}
+
+/**
+ * Sets the priority of the current process to a new one.
+ */
+int sys_set_priority()
+{
+    int priority = MIN_PRIO;
+
+    priority = (unsigned int) leer_registro(1);
+
+    if ( MIN_PRIO > priority || MAX_PRIO < priority )
+        return -1;
+
+    p_proc_actual->priority = priority;
+
+    return 0;
 }
 
 /*

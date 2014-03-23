@@ -53,3 +53,8 @@ int srv_sleep(unsigned int seconds)
 {
     return llamsis(SYS_ID_SLEEP, 1, (long) seconds);
 }
+
+int srv_set_priority(unsigned int priority)
+{
+    return llamsis(SYS_GET_PRIORITY, 1, (long) priority);
+}

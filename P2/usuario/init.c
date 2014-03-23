@@ -19,19 +19,19 @@ int main()
     printf("PID: %d\n", srv_get_current_process_id());
     printf("init: comienza\n");
 
-    crear_proceso("simplon");
+    crear_proceso("simplon_prio");
 
     /* Este programa causa una excepción */
-    crear_proceso("excep_arit");
+    //crear_proceso("excep_arit");
 
     /* Este programa crea otro proceso que ejecuta simplon a una excepción */
-    crear_proceso("excep_mem");
+    //crear_proceso("excep_mem");
     
     /* No existe: debe fallar */
-    crear_proceso("noexiste");
+    //crear_proceso("noexiste");
 
     /* Snorlax goes to sleep... */
-    crear_proceso("dormilon");
+    //crear_proceso("dormilon");
 
     printf("init: termina\n");
     

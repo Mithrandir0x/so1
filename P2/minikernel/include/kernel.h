@@ -1,9 +1,9 @@
 /*
  *  minikernel/include/kernel.h
  *
- *  Minikernel. VersiÛn 1.0
+ *  Minikernel. Versi√≥n 1.0
  *
- *  Fernando PÈrez Costoya
+ *  Fernando P√©rez Costoya
  *
  */
 
@@ -32,12 +32,13 @@ typedef struct BCP_t {
     BCPptr siguiente;           /* puntero a otro BCP */
     void *info_mem;             /* descriptor del mapa de memoria */
     unsigned int tts;           /* Ticks-To-Sleep (ticks to be sleeping before waking up) */
+    unsigned int priority;      /* integer value of priority, the more it has, the more important is */
 } BCP;
 
 /*
  * Definicion del tipo que corresponde con la cabecera de una lista
  * de BCPs. Este tipo se puede usar para diversas listas (procesos listos,
- * procesos bloqueados en sem·foro, etc.).
+ * procesos bloqueados en sem√°foro, etc.).
  */
 typedef struct{
     BCP *primero;
@@ -64,8 +65,10 @@ lista_BCPs lista_listos = {NULL, NULL};
 
 lista_BCPs l_slept_procs = { NULL, NULL };
 
+int f_pending_planning = NULL;
+
 /*
- * DefiniciÛn del tipo que corresponde con una entrada en la tabla de
+ * Definici√≥n del tipo que corresponde con una entrada en la tabla de
  * llamadas al sistema.
  */
 typedef struct {
@@ -80,6 +83,7 @@ int sis_terminar_proceso();
 int sis_escribir();
 int sys_get_current_pid();
 int sys_sleep();
+int sys_set_priority();
 
 /*
  * Variable global que contiene las rutinas que realizan cada llamada
@@ -89,12 +93,31 @@ servicio tabla_servicios[NSERVICIOS] = {
     {sis_terminar_proceso},
     {sis_escribir},
     {sys_get_current_pid},
-    {sys_sleep}
+    {sys_sleep},
+    {sys_set_priority}
 };
 
 /**
  * Coment out this line to enable debug output when updating BCP's TTS's.
  */
 //#define __KRN_DBG_UPDATE_SLEPT_PROCESS__
+
+/**
+ * WARNING! ACHTUNG! ATENCIO! ATENCION!
+ *
+ *    UNCOMMENT ONLY 1 SCHEDULER
+ *          AT A TIME!!!
+ *
+ * WARNING! ACHTUNG! ATENCIO! ATENCION!
+ *
+ * __KRN_SCHEDULER_DEFAULT__
+ *   This is the first scheduler. When the scheduler is called,
+ *   it returns the next task available in the ready BCP list.
+ *
+ * __KRN_SCHEDULER_PRIORITIES__
+ *   This scheduler returns the 
+ */
+#define __KRN_SCHEDULER_DEFAULT__
+//#define __KRN_SCHEDULER_PRIORITIES__
 
 #endif /* _KERNEL_H */

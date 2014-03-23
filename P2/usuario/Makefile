@@ -13,7 +13,7 @@ BIBLIOTECA=$(LIBDIR)/libserv.a
 CC=cc
 CFLAGS=-Wall -fPIC -Werror -g -I$(INCLUDEDIR)
 
-PROGRAMAS=init excep_arit excep_mem simplon dormilon
+PROGRAMAS=init excep_arit excep_mem simplon dormilon simplon_prio
 
 all: biblioteca $(PROGRAMAS)
 
@@ -39,6 +39,10 @@ simplon: simplon.o $(BIBLIOTECA)
 dormilon.o: $(INCLUDEDIR)/servicios.h
 dormilon: dormilon.o $(BIBLIOTECA)
 	$(CC) -shared -o $@ dormilon.o -L$(LIBDIR) -lserv 
+
+simplon_prio.o: $(INCLUDEDIR)/servicios.h
+simplon_prio: simplon_prio.o $(BIBLIOTECA)
+	$(CC) -shared -o $@ simplon_prio.o -L$(LIBDIR) -lserv 
 
 clean:
 	rm -f *.o $(PROGRAMAS)
