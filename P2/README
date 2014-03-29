@@ -1,5 +1,9 @@
 LOPEZ SANCHEZ ORIOL
 
+ASSIGNMENT 2 - STEP 1
+
+The kernel has been modified to support process with priorities.
+
 It is possible to execute the code by calling in shell:
 
 $ make clean

@@ -65,7 +65,7 @@ lista_BCPs lista_listos = {NULL, NULL};
 
 lista_BCPs l_slept_procs = { NULL, NULL };
 
-int f_pending_planning = NULL;
+int f_pending_schedulling = false;
 
 /*
  * Definición del tipo que corresponde con una entrada en la tabla de
@@ -101,23 +101,5 @@ servicio tabla_servicios[NSERVICIOS] = {
  * Coment out this line to enable debug output when updating BCP's TTS's.
  */
 //#define __KRN_DBG_UPDATE_SLEPT_PROCESS__
-
-/**
- * WARNING! ACHTUNG! ATENCIO! ATENCION!
- *
- *    UNCOMMENT ONLY 1 SCHEDULER
- *          AT A TIME!!!
- *
- * WARNING! ACHTUNG! ATENCIO! ATENCION!
- *
- * __KRN_SCHEDULER_DEFAULT__
- *   This is the first scheduler. When the scheduler is called,
- *   it returns the next task available in the ready BCP list.
- *
- * __KRN_SCHEDULER_PRIORITIES__
- *   This scheduler returns the 
- */
-#define __KRN_SCHEDULER_DEFAULT__
-//#define __KRN_SCHEDULER_PRIORITIES__
 
 #endif /* _KERNEL_H */

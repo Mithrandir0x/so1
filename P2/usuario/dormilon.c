@@ -14,13 +14,6 @@ int main()
     
     printf("WHAAAAAAGHH!! Raging up!!\n");
 
-
-    printf("Snoooorlaxing again...\n");
-    
-    srv_sleep(1);
-    
-    printf("WHAAAAAAGHH!! Raging up again!!\n");
-
     printf("dormilon: termina\n");
     
     return 0;

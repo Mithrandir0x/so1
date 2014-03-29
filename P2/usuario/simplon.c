@@ -16,13 +16,14 @@
 #define TOT_ITER 5 /* ponga las que considere oportuno */
 
 int main(){
-    printf("PID: %d\n", srv_get_current_process_id());
+    int pid = srv_get_current_process_id();
     int i;
-
-    int k;
-    printf("Snooooze...\n");
-    k = srv_sleep(1);
-    printf("Waking up [%d]...\n", k);
+    
+    printf("simplon: PID [%d]\n", pid);
+    
+    printf("simplon: Snooooze...\n");
+    srv_sleep(1);
+    printf("simplon: Waking up...\n");
 
     for (i=0; i<TOT_ITER; i++)
         printf("simplon: i %d\n", i);

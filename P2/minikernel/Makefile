@@ -3,14 +3,14 @@
 #   Makefile del sistema 
 #
 
-INCLUDEDIR=include
-CC=gcc
-CFLAGS=-g -fPIC -Wall -I$(INCLUDEDIR)
+INCLUDEDIR = include
+CC         = gcc
+CFLAGS     = -g -fPIC -Wall -I$(INCLUDEDIR)
+OBJS_KER   = kernel.o HAL.o 
+BIB_KER    = -ldl
 
 all: kernel
 
-OBJS_KER=kernel.o HAL.o 
-BIB_KER=-ldl
 
 kernel.o: $(INCLUDEDIR)/kernel.h $(INCLUDEDIR)/HAL.h $(INCLUDEDIR)/const.h $(INCLUDEDIR)/llamsis.h
 

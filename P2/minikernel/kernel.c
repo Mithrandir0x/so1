@@ -24,11 +24,11 @@ static void insertar_ultimo(lista_BCPs *lista, BCP * proc);
 static void eliminar_primero(lista_BCPs *lista);
 static void eliminar_elem(lista_BCPs *lista, BCP * proc);
 static void print_bcp_list(lista_BCPs *list);
-static BCP* get_max_priority_bcp(lista_BCPs *list);
 
 /**
  * Scheduler related function declarations
  */
+static BCP* get_max_priority_bcp(lista_BCPs *list);
 static void espera_int();
 static BCP * planificador();
 
@@ -165,9 +165,9 @@ static BCP* get_max_priority_bcp(lista_BCPs *list)
 {
     unsigned int max = MIN_PRIO;
     BCP *p = list->primero;
-    BCP *p_max = NULL;
+    BCP *p_max = p;
     
-    for ( ; p ; p->siguiente )
+    for ( ; p ; p = p->siguiente )
     {
         if ( p->priority == MAX_PRIO ) 
             return p;
@@ -205,8 +205,6 @@ static void espera_int(){
     fijar_nivel_int(nivel);
 }
 
-#ifdef __KRN_SCHEDULER_DEFAULT__
-
 /*
  * Función de planificacion que implementa un algoritmo FIFO.
  */
@@ -227,34 +225,8 @@ static BCP * planificador(){
     else
         printk("[KRN][-1][%16.16s] SCHEDULLING NEXT PROCESS\n", "planificador");
     
-    return lista_listos.primero;
+    return get_max_priority_bcp(&lista_listos);
 }
-
-#endif
-
-#ifdef __KRN_SCHEDULER_PRIORITIES__
-
-static BCP * planificador(){
-    if ( lista_listos.primero==NULL )
-    {
-        if ( p_proc_actual )
-            printk("[KRN][%2d][%16.16s] WAITING FOR A PROCESS TO AWAKE\n", p_proc_actual->id, "planificador");
-        else
-            printk("[KRN][-1][%16.16s] WAITING FOR A PROCESS TO AWAKE\n", "planificador");
-    }
-    
-    while (lista_listos.primero==NULL)
-        espera_int();       /* No hay nada que hacer */
-
-    if ( p_proc_actual )
-        printk("[KRN][%2d][%16.16s] SCHEDULLING NEXT PROCESS\n", p_proc_actual->id, "planificador");
-    else
-        printk("[KRN][-1][%16.16s] SCHEDULLING NEXT PROCESS\n", "planificador");
-    
-    return lista_listos.primero;
-}
-
-#endif
 
 /*
  *
@@ -275,7 +247,7 @@ static void liberar_proceso(){
     liberar_imagen(p_proc_actual->info_mem); /* liberar mapa */
 
     p_proc_actual->estado=TERMINADO;
-    eliminar_primero(&lista_listos); /* proc. fuera de listos */
+    eliminar_elem(&lista_listos, p_proc_actual);
 
     printk("[KRN][%2d][%16.16s] READY BCP LIST: \n", p_proc_actual->id, "liberar_proceso");
     print_bcp_list(&lista_listos);
@@ -289,8 +261,9 @@ static void liberar_proceso(){
     p_proc_actual = p_proc_siguiente;
 
     liberar_pila(p_proc_anterior->pila);
+
+    //printk("[KRN][%2d][%16.16s] MADE FREE PROCESS [%2d] STACK.\n", p_proc_actual->id, "liberar_proceso", p_proc_anterior->id);
     
-    /* "cambio_contexto" is in charge of rising the interruption level to XL_CLK. */
     cambio_contexto(NULL, &(p_proc_actual->contexto_regs));
         
         return; /* no debería llegar aqui */
@@ -329,6 +302,8 @@ static void block_process()
     p_proc_actual = p_proc_siguiente;
 
     liberar_pila(p_proc_anterior->pila);
+
+    f_pending_schedulling = false;
     
     /* "cambio_contexto" is in charge of rising the interruption level to XL_CLK. */
     /*
@@ -361,8 +336,6 @@ static void unblock_process(BCP* bcp)
     printk("[KRN][%2d][%16.16s] READY BCP LIST: \n", p_proc_actual->id, "unblock_process");
     print_bcp_list(&lista_listos);
 
-    activar_int_SW();
-
     fijar_nivel_int(old_int_level);
 }
 
@@ -372,7 +345,7 @@ static void update_slept_process()
 
     BCP* bcp = l_slept_procs.primero;
     BCP* next_bcp = NULL;
-    //for ( ; bcp ; bcp = bcp->siguiente )
+    
     while ( bcp )
     {
         bcp->tts--;
@@ -384,6 +357,15 @@ static void update_slept_process()
         if ( !bcp->tts )
         {
             unblock_process(bcp);
+
+            if ( p_proc_actual->priority < bcp->priority )
+            {
+                printk("[KRN][%2d][%16.16s] PROCESS [%2d] WITH HIGHER PRIORITY MUST BE AWAKEN\n", p_proc_actual->id, "update_slept_process", bcp->id);
+
+                f_pending_schedulling = true;
+                activar_int_SW();
+            }
+
             bcp = next_bcp;
         }
         else
@@ -477,12 +459,23 @@ static void tratar_llamsis(){
  */
 static void int_sw()
 {
-    if ( p_proc_actual )
-        printk("[KRN][%2d]", p_proc_actual->id);
-    else
-        printk("[KRN][-1]");
+    BCP *p_proc_anterior = NULL;
 
-    printk("[%16.16s] TREATING SOFTWARE INTERRUPTION\n", "int_sw");
+    printk("[KRN][%2d][%16.16s] TREATING SOFTWARE INTERRUPTION\n", p_proc_actual->id, "int_sw");
+
+    if ( f_pending_schedulling )
+    {
+        p_proc_anterior = p_proc_actual;
+        liberar_pila(p_proc_anterior->pila);
+        p_proc_actual = planificador();
+        
+        printk("[KRN][%2d][%16.16s] PRIORITIZED PROCESS. CHANGING CONTEXT: [%2d] => [%2d]\n", p_proc_actual->id, "int_sw", p_proc_anterior->id, p_proc_actual->id);
+
+        printk("[KRN][%2d][%16.16s] READY BCP LIST: \n", p_proc_actual->id, "int_sw");
+        print_bcp_list(&lista_listos);
+
+        cambio_contexto(&(p_proc_anterior->contexto_regs), &(p_proc_actual->contexto_regs));
+    }
 
     return;
 }
@@ -630,9 +623,14 @@ int sys_set_priority()
     priority = (unsigned int) leer_registro(1);
 
     if ( MIN_PRIO > priority || MAX_PRIO < priority )
+    {
+        printk("[KRN][%2d][%16.16s] INVALID PRIORITY VALUE\n", p_proc_actual->id, "sys_sleep");
         return -1;
+    }
 
     p_proc_actual->priority = priority;
+
+    printk("[KRN][%2d][%16.16s] SETTING NEW PRIORITY: [%d]\n", p_proc_actual->id, "sys_sleep", priority);
 
     return 0;
 }
@@ -658,7 +656,7 @@ int main(){
     iniciar_cont_teclado();     /* inici cont. teclado */
 
     /* crea proceso inicial */
-    printk("[KRN][-1][            main] INITIALIZING KERNEL\n");
+    printk("%s[KRN][-1][            main] INITIALIZING KERNEL%s\n", KRED, KNRM);
     if (crear_tarea((void *) "init") < 0)
         panico("[KRN][-1][            main] >> KERNEL_EXCEPTION [[init] image not found] <<");
     

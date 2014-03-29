@@ -19,7 +19,11 @@ int main()
     printf("PID: %d\n", srv_get_current_process_id());
     printf("init: comienza\n");
 
+    crear_proceso("longsum");
+
     crear_proceso("simplon_prio");
+
+    crear_proceso("getc");
 
     /* Este programa causa una excepción */
     //crear_proceso("excep_arit");
