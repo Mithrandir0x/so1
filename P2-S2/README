@@ -1,0 +1,33 @@
+LOPEZ SANCHEZ ORIOL
+
+ASSIGNMENT 2 - STEP 2
+
+The kernel has been modified to support process with priorities that change
+over the time, instead of having static priorities like in the previous step.
+
+It is possible to execute the code by calling in shell:
+
+$ make clean
+$ make
+$ make exe
+
+If you desire to pipe the output to a file, please use this instead:
+
+$ make exe | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" > log
+
+My humblest apologies for making you use this command, but as the need of
+separating userspace log from kernelspace growed, I found out colors that the
+term love, and how could I refuse to such candy?
+
+So, what does sed do? Simply filter every terminal lovely color to dull nullness.
+
+Anyway, how's your day being so far?
+
+SPECIAL MACROS AT "kernel.h":
+
+__KRN_DBG_UPDATE_SLEPT_PROCESS__
+  Defining this macro enables debug logs when process TTS are being updated.
+
+__KRN_DBG_UPDATE_WORKING_PROCESS__
+  Defining this macro enables debug log when process effective priority is
+  being updated.

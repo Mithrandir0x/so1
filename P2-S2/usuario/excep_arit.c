@@ -1,0 +1,41 @@
+/*
+ * usuario/excep_arit.c
+ *
+ *  Minikernel. Versión 1.0
+ *
+ *  Fernando Pérez Costoya
+ *
+ */
+
+/*
+ * Programa de usuario que fuerza una excepción aritmética
+ */
+
+#include "servicios.h"
+
+#define TOT_ITER 200    /* número total de iteraciones */
+#define ITER_EXCEP 5   /* iteración en la que causa excepción */
+
+int tot=0;
+
+int main(){
+    printf("PID: %d\n", srv_get_current_process_id());
+    int i;
+    int tot=0;
+
+    int k;
+    printf("Snooooze...\n");
+    k = srv_sleep(5);
+    printf("Waking up [%d]...\n", k);
+
+    for (i=0; i<TOT_ITER; i++){
+        printf("excep_arit: i %d \n", i);
+
+        /* Forzando una excepción */
+        if ((i+1)%ITER_EXCEP==0)
+            i/=tot;
+    }
+    /* No debería llegar ya que ha generado una excepción */
+    printf("excep_arit: termina\n");
+    return 0;
+}
