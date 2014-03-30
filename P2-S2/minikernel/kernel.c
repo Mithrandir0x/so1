@@ -414,29 +414,19 @@ static void update_working_process()
     int reset_all_bcps_priorities = true;
     BCP* p = lista_listos.primero;
 
-    for ( ; p ; p = p->siguiente )
+    p_proc_actual->effective_priority--;
+
+    if ( !p_proc_actual->effective_priority && lista_listos.length != 1 )
     {
-        if ( p->effective_priority > 0 )
+        printk("\x1B[31m[KRN][%2d][%16.16s] PROCESS HAS CONSUMED ALL ITS CPU TIME\x1B[0m\n", p_proc_actual->id, "update_working_process");
+        SIGNAL_RESCHEDULLING();
+    }
+
+    for ( ; reset_all_bcps_priorities && p ; p = p->siguiente )
+    {
+        if ( p->effective_priority )
         {
-            p->effective_priority--;
-
-#ifdef __KRN_DBG_UPDATE_WORKING_PROCESS__
-            print_bcp(p, "update_working_process");
-#endif
-
-            if ( !p->effective_priority )
-            {
-                // Doesn't make much sense to reschedule being only one in the list.
-                if ( lista_listos.length != 1 )
-                {
-                    printk("\x1B[31m[KRN][%2d][%16.16s] PROCESS [%2d] HAS CONSUMED ALL ITS CPU TIME\x1B[0m\n", p_proc_actual->id, "update_working_process", p->id);
-                    SIGNAL_RESCHEDULLING();
-                }
-            }
-            else
-            {
-                reset_all_bcps_priorities = false;
-            }
+            reset_all_bcps_priorities = false;
         }
     }
 

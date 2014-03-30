@@ -27,7 +27,3 @@ SPECIAL MACROS AT "kernel.h":
 
 __KRN_DBG_UPDATE_SLEPT_PROCESS__
   Defining this macro enables debug logs when process TTS are being updated.
-
-__KRN_DBG_UPDATE_WORKING_PROCESS__
-  Defining this macro enables debug log when process effective priority is
-  being updated.

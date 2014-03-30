@@ -103,6 +103,5 @@ servicio tabla_servicios[NSERVICIOS] = {
  * Coment out this line to enable debug output when updating BCP's TTS's.
  */
 //#define __KRN_DBG_UPDATE_SLEPT_PROCESS__
-//#define __KRN_DBG_UPDATE_WORKING_PROCESS__
 
 #endif /* _KERNEL_H */
