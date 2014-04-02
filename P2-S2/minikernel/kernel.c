@@ -23,6 +23,11 @@ static int buscar_BCP_libre();
 static void insertar_ultimo(lista_BCPs *lista, BCP * proc);
 static void eliminar_primero(lista_BCPs *lista);
 static void eliminar_elem(lista_BCPs *lista, BCP * proc);
+
+/**
+ * Print helper function declarations
+ */
+static char* get_state_string(int state);
 static void print_bcp_list(lista_BCPs *list);
 static void print_bcp(BCP *bcp, char *function);
 
@@ -44,7 +49,7 @@ static void unblock_process(BCP* bcp);
 /**
  * Interruption treatment and auxiliary function declarations
  */
-static void reset_priorities();
+static void reset_priorities(lista_BCPs *list);
 static void update_slept_process();
 static void update_working_process();
 static void exc_arit();
@@ -169,6 +174,19 @@ static void print_bcp_list(lista_BCPs *list)
         printk("\x1B[31m[KRN][-1][%16.16s] }\x1B[0m\n", "print_bcp_list");
 }
 
+static char* get_state_string(int state)
+{
+    switch ( state )
+    {
+        case 0: return "TERMINADO";
+        case 1: return "LISTO";
+        case 2: return "EJECUCION";
+        case 3: return "BLOQUEADO";
+    }
+
+    return "UNKNOWN";
+}
+
 static void print_bcp(BCP *bcp, char *function)
 {
     if ( p_proc_actual )
@@ -176,9 +194,10 @@ static void print_bcp(BCP *bcp, char *function)
     else
         printk("\x1B[31m[KRN][-1]");
 
-    printk("[%16.16s]   [%2d] {BP: [%2d], EP: [%2d]}\x1B[0m\n",
+    printk("[%16.16s]   [%2d] {S: [%9s], BP: [%2d], EP: [%2d]}\x1B[0m\n",
         function,
         bcp->id,
+        get_state_string(bcp->estado),
         bcp->base_priority,
         bcp->effective_priority
     );
@@ -187,19 +206,31 @@ static void print_bcp(BCP *bcp, char *function)
 static BCP* get_max_priority_bcp(lista_BCPs *list)
 {
     unsigned int max = MIN_PRIO;
+    int reset_all_bcps_priorities = true;
     BCP *p = list->primero;
     BCP *p_max = p;
     
     for ( ; p ; p = p->siguiente )
     {
-        if ( p->base_priority == MAX_PRIO ) 
+        if ( p->effective_priority == 0 )
+            continue;
+        else
+            reset_all_bcps_priorities = false;
+
+        if ( p->effective_priority == MAX_PRIO ) 
             return p;
         
-        if ( p->base_priority > max )
+        if ( p->effective_priority > max )
         {
             p_max = p;
-            max = p->base_priority;
+            max = p->effective_priority;
         }
+    }
+
+    if ( reset_all_bcps_priorities )
+    {
+        reset_priorities(&lista_listos);
+        reset_priorities(&l_slept_procs);
     }
 
     return p_max;
@@ -288,6 +319,7 @@ static void liberar_proceso(){
 
     //printk("\x1B[31m[KRN][%2d][%16.16s] MADE FREE PROCESS [%2d] STACK.\x1B[0m\n", p_proc_actual->id, "liberar_proceso", p_proc_anterior->id);
     
+    p_proc_actual->estado = EJECUCION;
     cambio_contexto(NULL, &(p_proc_actual->contexto_regs));
         
         return; /* no debería llegar aqui */
@@ -334,6 +366,7 @@ static void block_process()
      * Do save old context to be swapped, so that it is
      * possible to restore it after being awaken.
      */
+    p_proc_actual->estado = EJECUCION;
     cambio_contexto(&(p_proc_anterior->contexto_regs), &(p_proc_actual->contexto_regs));
 }
 
@@ -397,41 +430,34 @@ static void update_slept_process()
     }
 }
 
-static void reset_priorities()
+static void reset_priorities(lista_BCPs *list)
 {
-    BCP* p = lista_listos.primero;
+    BCP* p = list->primero;
 
-    //printk("\x1B[31m[KRN][%2d][%16.16s] RESETTING EFFECTIVE PRIORITIES OF READY LIST\x1B[0m\n", p_proc_actual->id, "reset_priorities");
+    printk("\x1B[31m[KRN][%2d][%16.16s] RESETTING EFFECTIVE PRIORITIES\x1B[0m\n", p_proc_actual->id, "reset_priorities");
 
     for ( ; p ; p = p->siguiente )
     {
-        p->effective_priority = p->base_priority;
+        p->effective_priority = ( p->effective_priority / 2 ) + p->base_priority;
     }
+
+    print_bcp_list(list);
 }
 
 static void update_working_process()
 {
-    int reset_all_bcps_priorities = true;
-    BCP* p = lista_listos.primero;
-
-    p_proc_actual->effective_priority--;
-
-    if ( !p_proc_actual->effective_priority && lista_listos.length != 1 )
+    if ( p_proc_actual->estado == EJECUCION && p_proc_actual->effective_priority > 0 )
     {
-        printk("\x1B[31m[KRN][%2d][%16.16s] PROCESS HAS CONSUMED ALL ITS CPU TIME\x1B[0m\n", p_proc_actual->id, "update_working_process");
-        SIGNAL_RESCHEDULLING();
-    }
+        p_proc_actual->effective_priority--;
 
-    for ( ; reset_all_bcps_priorities && p ; p = p->siguiente )
-    {
-        if ( p->effective_priority )
+        printk("\x1B[31m[KRN][%2d][%16.16s] CURRENT PROCESS UPDATED EP: [%d]\x1B[0m\n", p_proc_actual->id, "update_working_process", p_proc_actual->effective_priority);
+
+        if ( !p_proc_actual->effective_priority )
         {
-            reset_all_bcps_priorities = false;
+            printk("\x1B[31m[KRN][%2d][%16.16s] PROCESS HAS CONSUMED ALL ITS CPU TIME\x1B[0m\n", p_proc_actual->id, "update_working_process");
+            SIGNAL_RESCHEDULLING();
         }
     }
-
-    if ( reset_all_bcps_priorities )
-        reset_priorities();
 }
 
 /*
@@ -529,13 +555,18 @@ static void int_sw()
         p_proc_anterior = p_proc_actual;
         liberar_pila(p_proc_anterior->pila);
         p_proc_actual = planificador();
-        
-        printk("\x1B[31m[KRN][%2d][%16.16s] PRIORITIZED PROCESS. CHANGING CONTEXT: [%2d] => [%2d]\x1B[0m\n", p_proc_actual->id, "int_sw", p_proc_anterior->id, p_proc_actual->id);
 
-        //printk("\x1B[31m[KRN][%2d][%16.16s] READY BCP LIST: \x1B[0m\n", p_proc_actual->id, "int_sw");
-        //print_bcp_list(&lista_listos);
+        if ( p_proc_actual->id != p_proc_anterior->id )
+        {
+            printk("\x1B[31m[KRN][%2d][%16.16s] PRIORITIZED PROCESS. CHANGING CONTEXT: [%2d] => [%2d]\x1B[0m\n", p_proc_actual->id, "int_sw", p_proc_anterior->id, p_proc_actual->id);
 
-        cambio_contexto(&(p_proc_anterior->contexto_regs), &(p_proc_actual->contexto_regs));
+            //printk("\x1B[31m[KRN][%2d][%16.16s] READY BCP LIST: \x1B[0m\n", p_proc_actual->id, "int_sw");
+            //print_bcp_list(&lista_listos);
+
+            p_proc_anterior->estado = LISTO;
+            p_proc_actual->estado = EJECUCION;
+            cambio_contexto(&(p_proc_anterior->contexto_regs), &(p_proc_actual->contexto_regs));   
+        }
     }
 
     return;
@@ -761,6 +792,7 @@ int main(){
     
     /* activa proceso inicial */
     p_proc_actual=planificador();
+    p_proc_actual->estado = EJECUCION;
     cambio_contexto(NULL, &(p_proc_actual->contexto_regs));
     panico("\033[1m\033[31m[KRN][-1][            main] >> KERNEL_EXCEPTION [S.O. Unexpected reactivation] <<\x1B[0m");
     return 0;

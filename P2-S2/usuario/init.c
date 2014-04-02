@@ -15,7 +15,7 @@ int main()
     printf("init: comienza\n");
 
     // Has priority 20 and does not sleep
-    crear_proceso("longsum");
+    //crear_proceso("longsum");
 
     // Has priority 40, but sleeps for 2 seconds
     crear_proceso("simplon_prio");
