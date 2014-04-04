@@ -27,6 +27,9 @@ clean:
 exe:
 	./boot/boot ./minikernel/kernel
 
+log:
+	make exe | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" > kr.log
+
 # Target to pack for delivery
 dist:
 	mkdir -p $(DIST_PKG)

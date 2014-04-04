@@ -18,7 +18,7 @@
             "path": ".",
             "file_exclude_patterns": ["*.*"],
             "file_include_patterns": ["Makefile", "README"],
-            "folder_exclude_patterns": ["lib", "include", "boot"]
+            "folder_exclude_patterns": ["include", "boot"]
         }
     ],
     "settings":

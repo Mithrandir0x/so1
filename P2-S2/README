@@ -1,9 +1,25 @@
 LOPEZ SANCHEZ ORIOL
 
-ASSIGNMENT 2 - STEP 2
+ASSIGNMENT 2 - STEP 2 -------------------------------------------------------------------
 
 The kernel has been modified to support process with priorities that change
 over the time, instead of having static priorities like in the previous step.
+
+With this assignment, I tried to keep the names of functions and variables required
+to be implemented as the doc requires, but there are some that I left them:
+
+- fijar_prio                -> sys_set_priority
+- replanificacion_pendiente -> f_pending_schedulling
+
+Also, notice that the kernel logs use escape color chars to separate kernel logging,
+kernel exceptions and userspace logging visually. If it is absolutely required to
+remove all color awesomeness, replace to empty string this expressions:
+
+- \033[1m\033[31m
+- \x1B[31m
+- \x1B[0m
+
+CODE EXECUTION --------------------------------------------------------------------------
 
 It is possible to execute the code by calling in shell:
 
@@ -11,19 +27,30 @@ $ make clean
 $ make
 $ make exe
 
+MAKE TARGETS ----------------------------------------------------------------------------
+
+$ make log
+
+This target allows to boot the kernel and pipe the output through a log file
+named "kr.log", without having to see the color escape chars.
+
+SPECIAL MACROS --------------------------------------------------------------------------
+
+"kernel.h":
+
+__KRN_DBG_UPDATE_SLEPT_PROCESS__
+  Defining this macro enables debug logs when process TTS are being updated.
+
+TROUBLESHOOTING -------------------------------------------------------------------------
+
 If you desire to pipe the output to a file, please use this instead:
 
-$ make exe | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" > log
+$ make exe | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" > kr.log
 
 My humblest apologies for making you use this command, but as the need of
-separating userspace log from kernelspace growed, I found out colors that the
-term love, and how could I refuse to such candy?
+separating userspace log from kernelspace growed, I found out colors that
+term loves, and how could I refuse to such candy?
 
 So, what does sed do? Simply filter every terminal lovely color to dull nullness.
 
 Anyway, how's your day being so far?
-
-SPECIAL MACROS AT "kernel.h":
-
-__KRN_DBG_UPDATE_SLEPT_PROCESS__
-  Defining this macro enables debug logs when process TTS are being updated.

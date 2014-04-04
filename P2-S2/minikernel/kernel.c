@@ -29,12 +29,12 @@ static void eliminar_elem(lista_BCPs *lista, BCP * proc);
  */
 static char* get_state_string(int state);
 static void print_bcp_list(lista_BCPs *list);
-static void print_bcp(BCP *bcp, char *function);
+static void print_bcp(BCP *bcp);
 
 /**
  * Scheduler related function declarations
  */
-static BCP* get_max_priority_bcp(lista_BCPs *list);
+static BCP* maxima_prioridad(lista_BCPs *list);
 static void espera_int();
 static BCP * planificador();
 
@@ -49,7 +49,7 @@ static void unblock_process(BCP* bcp);
 /**
  * Interruption treatment and auxiliary function declarations
  */
-static void reset_priorities(lista_BCPs *list);
+static void reajustar_prioridades(lista_BCPs *list);
 static void update_slept_process();
 static void update_working_process();
 static void exc_arit();
@@ -60,7 +60,12 @@ static void int_sw();
 static void tratar_llamsis();
 
 /**
- * This macro encapsulates SW interruption activation without
+ * This macro encapsulates SW interruption activation without having to
+ * write them all the time, and we save another intermediate useless call.
+ *
+ * NOTICE: The use of the do/while is to allow multi-line code for macro
+ * and sanitize the calls in other one-liner statements. I'm far from being
+ * a good coder, so better safe than sorry :S
  */
 #define SIGNAL_RESCHEDULLING() do { \
         f_pending_schedulling = true; \
@@ -114,8 +119,6 @@ static void insertar_ultimo(lista_BCPs *lista, BCP * proc){
         lista->ultimo->siguiente=proc;
     lista->ultimo= proc;
     proc->siguiente=NULL;
-
-    lista->length++;
 }
 
 /*
@@ -126,8 +129,6 @@ static void eliminar_primero(lista_BCPs *lista){
     if (lista->ultimo==lista->primero)
         lista->ultimo=NULL;
     lista->primero=lista->primero->siguiente;
-
-    lista->length--;
 }
 
 /*
@@ -146,8 +147,6 @@ static void eliminar_elem(lista_BCPs *lista, BCP * proc){
                 lista->ultimo=paux;
             paux->siguiente=paux->siguiente->siguiente;
         }
-
-        lista->length--;
     }
 }
 
@@ -156,24 +155,29 @@ static void eliminar_elem(lista_BCPs *lista, BCP * proc){
  */
 static void print_bcp_list(lista_BCPs *list)
 {
+    int i = 0;
     BCP *p = list->primero;
 
     if ( p_proc_actual )
-        printk("\x1B[31m[KRN][%2d][%16.16s] Length: [%2d] {\x1B[0m\n", p_proc_actual->id, "print_bcp_list", list->length);
+        printk("\x1B[31m[KRN][%2d][%16.16s] {\x1B[0m\n", p_proc_actual->id, "print_bcp_list");
     else
         printk("\x1B[31m[KRN][-1][%16.16s] {\x1B[0m\n", "print_bcp_list");
 
     for ( ; p ; p = p->siguiente )
     {
-        print_bcp(p, "print_bcp_list");
+        print_bcp(p);
+        i++;
     }
 
     if ( p_proc_actual )
-        printk("\x1B[31m[KRN][%2d][%16.16s] }\x1B[0m\n", p_proc_actual->id, "print_bcp_list");
+        printk("\x1B[31m[KRN][%2d][%16.16s] } Length: [%2d]\x1B[0m\n", p_proc_actual->id, "print_bcp_list", i);
     else
-        printk("\x1B[31m[KRN][-1][%16.16s] }\x1B[0m\n", "print_bcp_list");
+        printk("\x1B[31m[KRN][-1][%16.16s] } Length: [%2d]\x1B[0m\n", "print_bcp_list", i);
 }
 
+/**
+ * This function returns a string based on a state numerical identifier.
+ */
 static char* get_state_string(int state)
 {
     switch ( state )
@@ -187,7 +191,10 @@ static char* get_state_string(int state)
     return "UNKNOWN";
 }
 
-static void print_bcp(BCP *bcp, char *function)
+/**
+ * Print a BCP. It prints its id, state, base priority and effective priority.
+ */
+static void print_bcp(BCP *bcp)
 {
     if ( p_proc_actual )
         printk("\x1B[31m[KRN][%2d]", p_proc_actual->id);
@@ -195,7 +202,7 @@ static void print_bcp(BCP *bcp, char *function)
         printk("\x1B[31m[KRN][-1]");
 
     printk("[%16.16s]   [%2d] {S: [%9s], BP: [%2d], EP: [%2d]}\x1B[0m\n",
-        function,
+        "print_bcp",
         bcp->id,
         get_state_string(bcp->estado),
         bcp->base_priority,
@@ -203,34 +210,34 @@ static void print_bcp(BCP *bcp, char *function)
     );
 }
 
-static BCP* get_max_priority_bcp(lista_BCPs *list)
+static BCP* maxima_prioridad(lista_BCPs *list)
 {
-    unsigned int max = MIN_PRIO;
+    unsigned int max = 1;
     int reset_all_bcps_priorities = true;
     BCP *p = list->primero;
     BCP *p_max = p;
     
     for ( ; p ; p = p->siguiente )
     {
-        if ( p->effective_priority == 0 )
-            continue;
-        else
+        if ( p->effective_priority != 0 )
+        {
             reset_all_bcps_priorities = false;
 
-        if ( p->effective_priority == MAX_PRIO ) 
-            return p;
-        
-        if ( p->effective_priority > max )
-        {
-            p_max = p;
-            max = p->effective_priority;
+            if ( p->effective_priority == MAX_PRIO ) 
+                return p;
+            
+            if ( p->effective_priority > max )
+            {
+                p_max = p;
+                max = p->effective_priority;
+            }
         }
     }
 
     if ( reset_all_bcps_priorities )
     {
-        reset_priorities(&lista_listos);
-        reset_priorities(&l_slept_procs);
+        reajustar_prioridades(&lista_listos);
+        reajustar_prioridades(&l_slept_procs);
     }
 
     return p_max;
@@ -280,7 +287,7 @@ static BCP * planificador()
     // else
     //     printk("\x1B[31m[KRN][-1][%16.16s] SCHEDULLING NEXT PROCESS\x1B[0m\n", "planificador");
     
-    return get_max_priority_bcp(&lista_listos);
+    return maxima_prioridad(&lista_listos);
 }
 
 /*
@@ -357,8 +364,6 @@ static void block_process()
 
     p_proc_actual = p_proc_siguiente;
 
-    liberar_pila(p_proc_anterior->pila);
-
     f_pending_schedulling = false;
     
     /* "cambio_contexto" is in charge of rising the interruption level to XL_CLK. */
@@ -430,11 +435,11 @@ static void update_slept_process()
     }
 }
 
-static void reset_priorities(lista_BCPs *list)
+static void reajustar_prioridades(lista_BCPs *list)
 {
     BCP* p = list->primero;
 
-    printk("\x1B[31m[KRN][%2d][%16.16s] RESETTING EFFECTIVE PRIORITIES\x1B[0m\n", p_proc_actual->id, "reset_priorities");
+    printk("\x1B[31m[KRN][%2d][%16.16s] RESETTING EFFECTIVE PRIORITIES\x1B[0m\n", p_proc_actual->id, "reajustar_prioridades");
 
     for ( ; p ; p = p->siguiente )
     {
@@ -446,9 +451,10 @@ static void reset_priorities(lista_BCPs *list)
 
 static void update_working_process()
 {
-    if ( p_proc_actual->estado == EJECUCION && p_proc_actual->effective_priority > 0 )
+    if ( p_proc_actual->estado == EJECUCION )
     {
-        p_proc_actual->effective_priority--;
+        if ( p_proc_actual->effective_priority > 0 )
+            p_proc_actual->effective_priority--;
 
         printk("\x1B[31m[KRN][%2d][%16.16s] CURRENT PROCESS UPDATED EP: [%d]\x1B[0m\n", p_proc_actual->id, "update_working_process", p_proc_actual->effective_priority);
 
@@ -479,7 +485,7 @@ static void exc_arit(){
     if (!viene_de_modo_usuario())
         panico("\033[1m\033[31m[KRN][-1][        exc_arit] >> KERNEL_EXCEPTION [Invalid arithmetic operation] <<\x1B[0m");
 
-    printk("\x1B[31m[KRN][%2d][%16.16s] >> EXCEPTION [Invalid arithmetic operation] <<\x1B[0m\n", p_proc_actual->id, "exc_arit");
+    printk("\033[1m\033[31m[KRN][%2d][%16.16s] >> EXCEPTION [Invalid arithmetic operation] <<\x1B[0m\n", p_proc_actual->id, "exc_arit");
     liberar_proceso();
 
         return; /* no debería llegar aqui */
@@ -496,7 +502,7 @@ static void exc_mem(){
             panico("\033[1m\033[31m[KRN][-1][         exc_mem] >> KERNEL_EXCEPTION [Invalid memory access] <<\x1B[0m");
     }
 
-    printk("\x1B[31m[KRN][%2d][%16.16s] >> EXCEPTION [Invalid memory access] <<\x1B[0m\n", p_proc_actual->id, "exc_mem");
+    printk("\033[1m\033[31m[KRN][%2d][%16.16s] >> EXCEPTION [Invalid memory access] <<\x1B[0m\n", p_proc_actual->id, "exc_mem");
     liberar_proceso();
 
         return; /* no debería llegar aqui */
@@ -507,7 +513,7 @@ static void exc_mem(){
  */
 static void int_terminal(){
 
-    printk("\x1B[31m[KRN][%2d][%16.16s] TRATANDO INT. DE TERMINAL [%c]\x1B[0m\n", p_proc_actual->id, "int_terminal", leer_puerto(DIR_TERMINAL));
+    printk("\033[1m\033[31m[KRN][%2d][%16.16s] >> INTERRUPTION [Terminal, key: [%c]]<<\x1B[0m\n", p_proc_actual->id, "int_terminal", leer_puerto(DIR_TERMINAL));
 
         return;
 }
@@ -517,7 +523,7 @@ static void int_terminal(){
  */
 static void int_reloj(){
 
-    //printk("\x1B[31m[KRN][%2d] >> INTERRUPTION [Clock] <<\x1B[0m\n", p_proc_actual->id);
+    //printk("\033[1m\033[31m[KRN][%2d][%16.16s] >> INTERRUPTION [Clock] <<\x1B[0m\n", p_proc_actual->id, "int_reloj");
 
     update_slept_process();
 
@@ -548,20 +554,19 @@ static void int_sw()
 {
     BCP *p_proc_anterior = NULL;
 
-    //printk("\x1B[31m[KRN][%2d][%16.16s] TREATING SOFTWARE INTERRUPTION\x1B[0m\n", p_proc_actual->id, "int_sw");
+    //printk("\033[1m\033[31m[KRN][%2d][%16.16s] >> INTERRUPTION [Software] <<\x1B[0m\n", p_proc_actual->id, "int_sw");
 
     if ( f_pending_schedulling )
     {
         p_proc_anterior = p_proc_actual;
-        liberar_pila(p_proc_anterior->pila);
         p_proc_actual = planificador();
+
+        printk("\x1B[31m[KRN][%2d][%16.16s] READY BCP LIST: \x1B[0m\n", p_proc_actual->id, "int_sw");
+        print_bcp_list(&lista_listos);
 
         if ( p_proc_actual->id != p_proc_anterior->id )
         {
-            printk("\x1B[31m[KRN][%2d][%16.16s] PRIORITIZED PROCESS. CHANGING CONTEXT: [%2d] => [%2d]\x1B[0m\n", p_proc_actual->id, "int_sw", p_proc_anterior->id, p_proc_actual->id);
-
-            //printk("\x1B[31m[KRN][%2d][%16.16s] READY BCP LIST: \x1B[0m\n", p_proc_actual->id, "int_sw");
-            //print_bcp_list(&lista_listos);
+            printk("\x1B[31m[KRN][%2d][%16.16s] PRIORITIZED PROCESS. CHANGING CONTEXT: [%2d] => [%2d]\x1B[0m\n", p_proc_actual->id, "int_sw", p_proc_anterior->id, p_proc_actual->id);    
 
             p_proc_anterior->estado = LISTO;
             p_proc_actual->estado = EJECUCION;
@@ -753,8 +758,8 @@ int sys_set_priority()
         p_proc_actual->effective_priority = p_proc_actual->effective_priority * ( new_priority + old_priority ) / ( 2 * old_priority );
     }
 
-    printk("\x1B[31m[KRN][%2d][%16.16s] SET NEW BASE PRIORITY:\n", p_proc_actual->id, "sys_set_priority");
-    print_bcp(p_proc_actual, "sys_set_priority");
+    printk("\x1B[31m[KRN][%2d][%16.16s] SET NEW BASE PRIORITY:\x1B[0m\n", p_proc_actual->id, "sys_set_priority");
+    print_bcp(p_proc_actual);
 
     if ( p_proc_actual->effective_priority < old_effective_priority )
     {

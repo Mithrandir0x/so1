@@ -1,10 +1,12 @@
 LOPEZ SANCHEZ ORIOL
 
-ASSIGNMENT 2 - STEP 1
+ASSIGNMENT 2 - STEP 1 -------------------------------------------------------------------
 
 The kernel has been modified to support process with priorities. If a slept
 process with a higher priority than current executing one awakes, the CPU will
 swap the context to execute the slept-to-awake process.
+
+CODE EXECUTION --------------------------------------------------------------------------
 
 It is possible to execute the code by calling in shell:
 
@@ -12,7 +14,9 @@ $ make clean
 $ make
 $ make exe
 
-SPECIAL MACROS AT "kernel.h":
+SPECIAL MACROS --------------------------------------------------------------------------
+
+"kernel.h":
 
 __KRN_DBG_UPDATE_SLEPT_PROCESS__
   Defining this macro enables debug logs when process TTS are being updated.

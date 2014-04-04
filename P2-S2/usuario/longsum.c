@@ -11,7 +11,7 @@ int main(){
     unsigned long i = 4294967295L;
     printf("longsum: PID %d\n", srv_get_current_process_id());
 
-    srv_set_priority(20);
+    srv_set_priority(30);
 
     srv_sleep(1);
 

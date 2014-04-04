@@ -24,11 +24,13 @@ static void insertar_ultimo(lista_BCPs *lista, BCP * proc);
 static void eliminar_primero(lista_BCPs *lista);
 static void eliminar_elem(lista_BCPs *lista, BCP * proc);
 static void print_bcp_list(lista_BCPs *list);
+static char* get_state_string(int state);
+static void print_bcp(BCP *bcp);
 
 /**
  * Scheduler related function declarations
  */
-static BCP* get_max_priority_bcp(lista_BCPs *list);
+static BCP* maxima_prioridad(lista_BCPs *list);
 static void espera_int();
 static BCP * planificador();
 
@@ -48,8 +50,8 @@ static void exc_arit();
 static void exc_mem();
 static void int_terminal();
 static void int_reloj();
-static void int_sw();
 static void tratar_llamsis();
+static void int_sw();
 
 /*
  *
@@ -134,34 +136,61 @@ static void eliminar_elem(lista_BCPs *lista, BCP * proc){
  */
 static void print_bcp_list(lista_BCPs *list)
 {
+    int i = 0;
     BCP *p = list->primero;
 
     if ( p_proc_actual )
         printk("[KRN][%2d][%16.16s] {\n", p_proc_actual->id, "print_bcp_list");
     else
         printk("[KRN][-1][%16.16s] {\n", "print_bcp_list");
-    
+
     for ( ; p ; p = p->siguiente )
     {
-        if ( p_proc_actual )
-            printk("[KRN][%2d]", p_proc_actual->id);
-        else
-            printk("[KRN][-1]");
-
-        printk("[%16.16s]   [%2d] {pr: [%2d]}\n",
-            "print_bcp_list",
-            p->id,
-            p->priority
-        );
+        print_bcp(p);
+        i++;
     }
 
     if ( p_proc_actual )
-        printk("[KRN][%2d][%16.16s] }\n", p_proc_actual->id, "print_bcp_list");
+        printk("[KRN][%2d][%16.16s] } Length: [%2d]\n", p_proc_actual->id, "print_bcp_list", i);
     else
-        printk("[KRN][-1][%16.16s] }\n", "print_bcp_list");
+        printk("[KRN][-1][%16.16s] } Length: [%2d]\n", "print_bcp_list", i);
 }
 
-static BCP* get_max_priority_bcp(lista_BCPs *list)
+/**
+ * This function returns a string based on a state numerical identifier.
+ */
+static char* get_state_string(int state)
+{
+    switch ( state )
+    {
+        case 0: return "TERMINADO";
+        case 1: return "LISTO";
+        case 2: return "EJECUCION";
+        case 3: return "BLOQUEADO";
+    }
+
+    return "UNKNOWN";
+}
+
+/**
+ * Print a BCP.
+ */
+static void print_bcp(BCP *bcp)
+{
+    if ( p_proc_actual )
+        printk("[KRN][%2d]", p_proc_actual->id);
+    else
+        printk("[KRN][-1]");
+
+    printk("[%16.16s]   [%2d] {S: [%9s], P: [%2d]}\n",
+        "print_bcp",
+        bcp->id,
+        get_state_string(bcp->estado),
+        bcp->priority
+    );
+}
+
+static BCP* maxima_prioridad(lista_BCPs *list)
 {
     unsigned int max = MIN_PRIO;
     BCP *p = list->primero;
@@ -225,7 +254,7 @@ static BCP * planificador(){
     else
         printk("[KRN][-1][%16.16s] SCHEDULLING NEXT PROCESS\n", "planificador");
     
-    return get_max_priority_bcp(&lista_listos);
+    return maxima_prioridad(&lista_listos);
 }
 
 /*
@@ -604,7 +633,6 @@ int sys_sleep()
 {
     /* Update process ticks to sleep  */
     p_proc_actual->tts = (unsigned int) leer_registro(1) * TICK;
-    /* p_proc_actual->tts = (unsigned int) leer_registro(1); */
     printk("[KRN][%2d][%16.16s] PUTTING TO SLEEP CURRENT PROCESS FOR [%d] TICKS\n", p_proc_actual->id, "sys_sleep", p_proc_actual->tts);
 
     /* Block the current process */
@@ -627,6 +655,13 @@ int sys_set_priority()
         printk("[KRN][%2d][%16.16s] INVALID PRIORITY VALUE\n", p_proc_actual->id, "sys_set_priority");
         return -1;
     }
+
+    // Should a process that lowers its own priority be shoop-da-wooped for another process with more priority?
+    /* if ( priority > p_proc_actual->priority )
+    {
+        f_pending_schedulling = true;
+        activar_int_SW();
+    } */
 
     p_proc_actual->priority = priority;
 
@@ -656,7 +691,7 @@ int main(){
     iniciar_cont_teclado();     /* inici cont. teclado */
 
     /* crea proceso inicial */
-    printk("%s[KRN][-1][            main] INITIALIZING KERNEL%s\n", KRED, KNRM);
+    printk("[KRN][-1][            main] INITIALIZING KERNEL\n");
     if (crear_tarea((void *) "init") < 0)
         panico("[KRN][-1][            main] >> KERNEL_EXCEPTION [[init] image not found] <<");
     

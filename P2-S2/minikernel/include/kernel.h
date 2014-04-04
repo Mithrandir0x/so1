@@ -44,7 +44,6 @@ typedef struct BCP_t {
 typedef struct{
     BCP *primero;
     BCP *ultimo;
-    int length;
 } lista_BCPs;
 
 
