@@ -19,6 +19,11 @@ remove all color awesomeness, replace to empty string this expressions:
 - \x1B[31m
 - \x1B[0m
 
+At "init.c", it is possible to select which test to use by changing the variable "test"'s
+value.
+
+Be careful with TEST_1, as it requires you to push any key to ensure that the test ends.
+
 CODE EXECUTION --------------------------------------------------------------------------
 
 It is possible to execute the code by calling in shell:

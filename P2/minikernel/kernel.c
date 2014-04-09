@@ -657,11 +657,13 @@ int sys_set_priority()
     }
 
     // Should a process that lowers its own priority be shoop-da-wooped for another process with more priority?
-    /* if ( priority > p_proc_actual->priority )
+    if ( priority < p_proc_actual->priority )
     {
+        printk("[KRN][%2d][%16.16s] PROCESS PRIORITY HAS BEEN LOWERED. TRIGGERING ICC.\n", p_proc_actual->id, "sys_set_priority");
+        
         f_pending_schedulling = true;
         activar_int_SW();
-    } */
+    }
 
     p_proc_actual->priority = priority;
 

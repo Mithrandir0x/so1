@@ -14,7 +14,7 @@
 
 int main()
 {
-    int test = TEST_2;
+    int test = TEST_1;
     
     printf("PID: %d\n", srv_get_current_process_id());
     printf("init: comienza\n");
@@ -34,7 +34,7 @@ int main()
      */
     if ( test == TEST_1 )
     {
-        printf("init: ejecutando TEST_1");
+        printf("init: ejecutando TEST_1\n");
 
         // Has priority 30 and does not sleep
         crear_proceso("longsum");
@@ -58,7 +58,7 @@ int main()
      */
     if ( test == TEST_2 )
     {
-        printf("init: ejecutando TEST_1");
+        printf("init: ejecutando TEST_2\n");
 
         // Has priority 30, and does not change throughout all its execution.
         crear_proceso("longsum");

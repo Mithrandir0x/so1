@@ -6,6 +6,8 @@ The kernel has been modified to support process with priorities. If a slept
 process with a higher priority than current executing one awakes, the CPU will
 swap the context to execute the slept-to-awake process.
 
+Be careful!! It requires you to push any key to ensure that the test ends.
+
 CODE EXECUTION --------------------------------------------------------------------------
 
 It is possible to execute the code by calling in shell:
