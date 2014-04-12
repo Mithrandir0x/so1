@@ -1,0 +1,2544 @@
+make[1]: Entering directory `/vagrant/P2-S2'
+./boot/boot ./minikernel/kernel
+[KRN][-1][            main] INITIALIZING KERNEL
+[KRN][-1][     crear_tarea] LOADED IMAGE [init] WITH PID [ 0]
+PID: 0
+init: comienza
+init: ejecutando TEST_1[KRN][ 0][sis_crear_proces] CREATING PROCESS [longsum]
+[KRN][ 0][     crear_tarea] LOADED IMAGE [longsum] WITH PID [ 1]
+[KRN][ 0][sis_crear_proces] CREATING PROCESS [longsum_prio]
+[KRN][ 0][     crear_tarea] LOADED IMAGE [longsum_prio] WITH PID [ 2]
+init: termina
+[KRN][ 0][sis_terminar_pro] ENDING PROCESS
+[KRN][ 0][ liberar_proceso] FREEING PROCESS
+[KRN][ 0][ liberar_proceso] READY BCP LIST: 
+[KRN][ 0][  print_bcp_list] {
+[KRN][ 0][       print_bcp]   [ 1] {S: [    LISTO], BP: [10], EP: [10]}
+[KRN][ 0][       print_bcp]   [ 2] {S: [    LISTO], BP: [10], EP: [10]}
+[KRN][ 0][  print_bcp_list] } Length: [ 2]
+[KRN][ 0][ liberar_proceso] CHANGING CONTEXT: [0] => [1]
+longsum: PID 1
+[KRN][ 1][sys_set_priority] SET NEW BASE PRIORITY:
+[KRN][ 1][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [20]}
+[KRN][ 1][       sys_sleep] PUTTING TO SLEEP CURRENT PROCESS FOR [100] TICKS
+[KRN][ 1][   block_process] BLOCKING PROCESS: [1]
+[KRN][ 1][   block_process] SLEPT BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [BLOQUEADO], BP: [30], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 1]
+[KRN][ 1][   block_process] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 2] {S: [    LISTO], BP: [10], EP: [10]}
+[KRN][ 1][  print_bcp_list] } Length: [ 1]
+[KRN][ 1][   block_process] CHANGING CONTEXT: [1] => [2]
+longsum_prio: PID 2
+[KRN][ 2][sys_set_priority] SET NEW BASE PRIORITY:
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [15]}
+[KRN][ 2][       sys_sleep] PUTTING TO SLEEP CURRENT PROCESS FOR [100] TICKS
+[KRN][ 2][   block_process] BLOCKING PROCESS: [2]
+[KRN][ 2][   block_process] SLEPT BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [BLOQUEADO], BP: [30], EP: [20]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [BLOQUEADO], BP: [20], EP: [15]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][   block_process] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][    planificador] WAITING FOR A PROCESS TO AWAKE
+[KRN][ 2][ unblock_process] AWAKENING PROCESS: [1]
+[KRN][ 2][ unblock_process] REMOVING PROCESS FROM THE SLEPT LIST
+[KRN][ 2][ unblock_process] ADDING THE AWAKEN PROCESS TO THE READY LIST
+[KRN][ 2][ unblock_process] SLEPT BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [BLOQUEADO], BP: [20], EP: [15]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][ unblock_process] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_slept_pro] PROCESS [ 1] WITH HIGHER PRIORITY MUST BE AWAKEN
+[KRN][ 2][ unblock_process] AWAKENING PROCESS: [2]
+[KRN][ 2][ unblock_process] REMOVING PROCESS FROM THE SLEPT LIST
+[KRN][ 2][ unblock_process] ADDING THE AWAKEN PROCESS TO THE READY LIST
+[KRN][ 2][ unblock_process] SLEPT BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][ unblock_process] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [20]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [15]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][   block_process] CHANGING CONTEXT: [2] => [1]
+longsum: Beginning to count sand...
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [15]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+longsum_prio: Beginning to count sand...
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [20], EP: [20]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [20], EP: [20]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+longsum_prio: Setting priority to minimal
+[KRN][ 2][sys_set_priority] SET NEW BASE PRIORITY:
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [ 6]}
+[KRN][ 2][sys_set_priority] PROCESS EFFECTIVE PRIORITY HAS BEEN LOWERED. TRIGGERING ICC.
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [ 6]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [15]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [14]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [13]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [12]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [11]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [10]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 1][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [EJECUCION], BP: [30], EP: [ 0]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [    LISTO], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 1] => [ 2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 2]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 1][          int_sw] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 1] {S: [    LISTO], BP: [30], EP: [30]}
+[KRN][ 1][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 1][  print_bcp_list] } Length: [ 2]
+[KRN][ 1][          int_sw] PRIORITIZED PROCESS. CHANGING CONTEXT: [ 2] => [ 1]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [29]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [28]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [27]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [26]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [25]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [24]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [23]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [22]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [21]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [20]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [19]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [18]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [17]
+[KRN][ 1][update_working_p] CURRENT PROCESS UPDATED EP: [16]
+longsum: finishes
+[KRN][ 1][sis_terminar_pro] ENDING PROCESS
+[KRN][ 1][ liberar_proceso] FREEING PROCESS
+[KRN][ 1][ liberar_proceso] READY BCP LIST: 
+[KRN][ 1][  print_bcp_list] {
+[KRN][ 1][       print_bcp]   [ 2] {S: [    LISTO], BP: [10], EP: [10]}
+[KRN][ 1][  print_bcp_list] } Length: [ 1]
+[KRN][ 1][ liberar_proceso] CHANGING CONTEXT: [1] => [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [0]
+[KRN][ 2][update_working_p] PROCESS HAS CONSUMED ALL ITS CPU TIME
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][reajustar_priori] RESETTING EFFECTIVE PRIORITIES
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][  print_bcp_list] } Length: [ 0]
+[KRN][ 2][          int_sw] READY BCP LIST: 
+[KRN][ 2][  print_bcp_list] {
+[KRN][ 2][       print_bcp]   [ 2] {S: [EJECUCION], BP: [10], EP: [10]}
+[KRN][ 2][  print_bcp_list] } Length: [ 1]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [9]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [8]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [7]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [6]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [5]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [4]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [3]
+[KRN][ 2][update_working_p] CURRENT PROCESS UPDATED EP: [2]
+longsum_prio: finishes
+[KRN][ 2][sis_terminar_pro] ENDING PROCESS
+[KRN][ 2][ liberar_proceso] FREEING PROCESS
+make[1]: Leaving directory `/vagrant/P2-S2'

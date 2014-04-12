@@ -1,0 +1,39 @@
+LOPEZ SANCHEZ ORIOL
+
+ASSIGNMENT 3 - STEP 1 -------------------------------------------------------------------
+
+CODE EXECUTION --------------------------------------------------------------------------
+
+It is possible to execute the code by calling in shell:
+
+$ make clean
+$ make
+$ make exe
+
+MAKE TARGETS ----------------------------------------------------------------------------
+
+$ make log
+
+This target allows to boot the kernel and pipe the output through a log file
+named "kr.log", without having to see the color escape chars.
+
+SPECIAL MACROS --------------------------------------------------------------------------
+
+"kernel.h":
+
+__KRN_DBG_UPDATE_SLEPT_PROCESS__
+  Defining this macro enables debug logs when process TTS are being updated.
+
+TROUBLESHOOTING -------------------------------------------------------------------------
+
+If you desire to pipe the output to a file, please use this instead:
+
+$ make exe | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" > kr.log
+
+My humblest apologies for making you use this command, but as the need of
+separating userspace log from kernelspace growed, I found out colors that
+term loves, and how could I refuse to such candy?
+
+So, what does sed do? Simply filter every terminal lovely color to dull nullness.
+
+Anyway, how's your day being so far?
