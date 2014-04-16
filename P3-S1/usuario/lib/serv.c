@@ -58,3 +58,8 @@ int srv_set_priority(unsigned int priority)
 {
     return llamsis(SYS_GET_PRIORITY, 1, (long) priority);
 }
+
+int srv_get_parent_pid()
+{
+    return llamsis(SYS_GET_PARENT_PID, 0);
+}

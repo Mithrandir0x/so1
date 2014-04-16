@@ -30,6 +30,7 @@ static void eliminar_elem(lista_BCPs *lista, BCP * proc);
 static char* get_state_string(int state);
 static void print_bcp_list(lista_BCPs *list);
 static void print_bcp(BCP *bcp);
+static void tell_them_the_truth(lista_BCPs *list, int dead_parrot_id);
 
 /**
  * Scheduler related function declarations
@@ -196,17 +197,22 @@ static char* get_state_string(int state)
  */
 static void print_bcp(BCP *bcp)
 {
+    int ppid = -1;
+
     if ( p_proc_actual )
         printk("\x1B[31m[KRN][%2d]", p_proc_actual->id);
     else
         printk("\x1B[31m[KRN][-1]");
 
-    printk("[%16.16s]   [%2d] {S: [%9s], BP: [%2d], EP: [%2d]}\x1B[0m\n",
+    if ( bcp->parent ) ppid = bcp->parent->id;
+
+    printk("[%16.16s]   [%2d] {S: [%9s], BP: [%2d], EP: [%2d], PPID: [%2d]}\x1B[0m\n",
         "print_bcp",
         bcp->id,
         get_state_string(bcp->estado),
         bcp->base_priority,
-        bcp->effective_priority
+        bcp->effective_priority,
+        ppid
     );
 }
 
@@ -241,6 +247,17 @@ static BCP* maxima_prioridad(lista_BCPs *list)
     }
 
     return p_max;
+}
+
+static void tell_them_the_truth(lista_BCPs *list, int dead_parrot_id)
+{
+    BCP *p = list->primero;
+    
+    for ( ; p ; p = p->siguiente )
+    {
+        if ( p->parent && p->parent->id == dead_parrot_id )
+            p->parent = NULL;
+    }
 }
 
 /*
@@ -310,6 +327,8 @@ static void liberar_proceso(){
 
     p_proc_actual->estado=TERMINADO;
     eliminar_elem(&lista_listos, p_proc_actual);
+    tell_them_the_truth(&lista_listos, p_proc_actual->id);
+    tell_them_the_truth(&l_slept_procs, p_proc_actual->id);
 
     printk("\x1B[31m[KRN][%2d][%16.16s] READY BCP LIST: \x1B[0m\n", p_proc_actual->id, "liberar_proceso");
     print_bcp_list(&lista_listos);
@@ -608,6 +627,7 @@ static int crear_tarea(char *prog){
             &(p_proc->contexto_regs));
         p_proc->id=proc;
         p_proc->estado=LISTO;
+        p_proc->parent = p_proc_actual;
 
         if ( p_proc_actual )
         {
@@ -768,6 +788,17 @@ int sys_set_priority()
     }
 
     return 0;
+}
+
+/**
+ * Returns the ID of the parent's current process.
+ */
+int sys_get_parent_pid()
+{
+    if ( p_proc_actual->parent != NULL )
+        return p_proc_actual->parent->id;
+    else
+        return -1;
 }
 
 /*

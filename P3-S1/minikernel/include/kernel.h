@@ -34,6 +34,7 @@ typedef struct BCP_t {
     unsigned int tts;                 /* Ticks-To-Sleep (ticks to be sleeping before waking up) */
     unsigned int base_priority;       /* the base priority of the process */
     unsigned int effective_priority;  /* the effective priority of the process */
+    BCPptr parent;                    /* pointer to the parent process that created this process */
 } BCP;
 
 /*
@@ -85,6 +86,7 @@ int sis_escribir();
 int sys_get_current_pid();
 int sys_sleep();
 int sys_set_priority();
+int sys_get_parent_pid();
 
 /*
  * Variable global que contiene las rutinas que realizan cada llamada
@@ -95,7 +97,8 @@ servicio tabla_servicios[NSERVICIOS] = {
     {sis_escribir},
     {sys_get_current_pid},
     {sys_sleep},
-    {sys_set_priority}
+    {sys_set_priority},
+    {sys_get_parent_pid}
 };
 
 /**

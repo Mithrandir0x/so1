@@ -15,15 +15,16 @@
 #define _LLAMSIS_H
 
 /* Numero de servicios disponibles */
-#define NSERVICIOS       6
+#define NSERVICIOS         7
 
-#define CREAR_PROCESO    0
-#define TERMINAR_PROCESO 1
-#define ESCRIBIR         2
+#define CREAR_PROCESO      0
+#define TERMINAR_PROCESO   1
+#define ESCRIBIR           2
 
-#define SYS_ID_GET_PID   3
-#define SYS_ID_SLEEP     4
-#define SYS_GET_PRIORITY 5
+#define SYS_ID_GET_PID     3
+#define SYS_ID_SLEEP       4
+#define SYS_GET_PRIORITY   5
+#define SYS_GET_PARENT_PID 6
 
 #endif /* _LLAMSIS_H */
 

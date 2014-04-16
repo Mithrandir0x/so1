@@ -33,6 +33,7 @@ int escribir(char *texto, unsigned int longi);
 int srv_get_current_process_id();
 int srv_sleep(unsigned int seconds);
 int srv_set_priority(unsigned int priority);
+int srv_get_parent_pid();
 
 #endif /* SERVICIOS_H */
 
