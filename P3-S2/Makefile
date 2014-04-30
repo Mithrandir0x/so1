@@ -3,7 +3,7 @@
 # 	Makefile global del sistema
 #
 DELIVERABLE_N = 3
-PKG           = minikernel_LopezSanchezOriol-pract-$(DELIVERABLE_N)-P1
+PKG           = minikernel_LopezSanchezOriol-pract-$(DELIVERABLE_N)-P2
 PKG_EXAM      = $(PKG)-Modif
 DIST          = ./dist
 DIST_PKG      = $(DIST)/$(PKG)
