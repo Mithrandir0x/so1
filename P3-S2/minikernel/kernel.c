@@ -473,7 +473,7 @@ static void tratar_padre()
         parent_bcp = p_proc_actual->parent;
         parent_bcp->n_children--;
 
-        if ( parent_bcp->n_children == 0 )
+        if ( parent_bcp->n_children == 0 && parent_bcp->estado == BLOQUEADO )
         {
             printk("\x1B[31m[KRN][%2d][%16.16s] ALL CHILDREN OF PARENT PROCESS [%2d] HAVE ENDED. UNBLOCKING PARENT PROCESS.\x1B[0m\n", p_proc_actual->id, "tratar_padre", parent_bcp->id);
             parent_bcp->effective_priority += ( parent_bcp->effective_priority * 10 ) / 100;
@@ -566,7 +566,7 @@ static void exc_mem(){
  */
 static void int_terminal(){
 
-    printk("\033[1m\033[31m[KRN][%2d][%16.16s] >> INTERRUPTION [Terminal, key: [%c]]<<\x1B[0m\n", p_proc_actual->id, "int_terminal", leer_puerto(DIR_TERMINAL));
+    printk("\033[1m\033[31m[KRN][%2d][%16.16s] >> INTERRUPTION [Terminal, key: [%c]] <<\x1B[0m\n", p_proc_actual->id, "int_terminal", leer_puerto(DIR_TERMINAL));
 
         return;
 }
@@ -622,6 +622,15 @@ static void int_sw()
         if ( p_proc_actual->id != p_proc_anterior->id )
         {
             printk("\x1B[31m[KRN][%2d][%16.16s] PRIORITIZED PROCESS. CHANGING CONTEXT: [%2d] => [%2d]\x1B[0m\n", p_proc_actual->id, "int_sw", p_proc_anterior->id, p_proc_actual->id);    
+
+#ifdef __KRN_DBG_UPDATE_PRIORITIES_LIST_BCPS__
+            printk("\x1B[31m[KRN][%2d][%16.16s] READY BCP LIST: \x1B[0m\n", p_proc_actual->id, "int_sw");
+            print_bcp_list(&lista_listos);
+            printk("\x1B[31m[KRN][%2d][%16.16s] SLEPT BCP LIST: \x1B[0m\n", p_proc_actual->id, "int_sw");
+            print_bcp_list(&l_slept_procs);
+            printk("\x1B[31m[KRN][%2d][%16.16s] WAITING BCP LIST: \x1B[0m\n", p_proc_actual->id, "int_sw");
+            print_bcp_list(&l_wait_procs);
+#endif
 
             p_proc_anterior->estado = LISTO;
             p_proc_actual->estado = EJECUCION;
@@ -697,6 +706,8 @@ static int crear_tarea(char *prog){
             printk("\x1B[31m[KRN][%2d][%16.16s] LOADED IMAGE [%s] WITH PID [%2d]\x1B[0m\n", p_proc_actual->id, "crear_tarea", prog, proc);
         else
             printk("\x1B[31m[KRN][-1][%16.16s] LOADED IMAGE [%s] WITH PID [%2d]\x1B[0m\n", "crear_tarea", prog, proc);
+
+        //print_bcp(p_proc);
     }
     else
     {
@@ -841,10 +852,16 @@ int sys_get_parent_pid()
 
 int sys_wait()
 {
-    printk("\x1B[31m[KRN][%2d][%16.16s] PROCESS IS WAITING FOR CHILDREN TO END...\x1B[0m\n", p_proc_actual->id, "sys_wait");
-
     /* Block the current process */
-    block_process(&l_wait_procs);
+    if ( p_proc_actual->n_children > 0 )
+    {
+        printk("\x1B[31m[KRN][%2d][%16.16s] PROCESS WILL WAIT FOR CHILDREN TO END...\x1B[0m\n", p_proc_actual->id, "sys_wait");
+        block_process(&l_wait_procs);
+    }
+    else
+    {
+        printk("\x1B[31m[KRN][%2d][%16.16s] PROCESS HAS NO CHILDREN AND WILL NOT WAIT\x1B[0m\n", p_proc_actual->id, "sys_wait");
+    }
 
     return 0;
 }

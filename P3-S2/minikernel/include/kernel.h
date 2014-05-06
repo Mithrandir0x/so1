@@ -113,5 +113,6 @@ servicio tabla_servicios[NSERVICIOS] = {
  */
 //#define __KRN_DBG_UPDATE_SLEPT_PROCESS__
 //#define __KRN_DBG_UPDATE_PRIORITIES__
+//#define __KRN_DBG_UPDATE_PRIORITIES_LIST_BCPS__
 
 #endif /* _KERNEL_H */
