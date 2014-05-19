@@ -94,15 +94,24 @@ static void test_4()
     srv_wait();
 }
 
+static void test_5()
+{
+    printf("init: ejecutando test_5\n");
+    
+    crear_proceso("repl_step");
+
+    srv_wait();
+}
+
 typedef void (*TEST_F)(void);
 
-#define N_TESTS 5
+#define N_TESTS 6
 
 int main()
 {
-    TEST_F tests[N_TESTS] = { &test_0, &test_1, &test_2, &test_3, &test_4 };
+    TEST_F tests[N_TESTS] = { &test_0, &test_1, &test_2, &test_3, &test_4, &test_5 };
     
-    TEST_F test = tests[4];
+    TEST_F test = tests[5];
     
     printf("PID: %d\n", srv_get_current_process_id());
     printf("init: comienza\n");
